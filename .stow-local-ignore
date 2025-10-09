@@ -1,0 +1,9 @@
+.+~
+\#.*\#
+\.stowrc
+\.stow-local-ignore
+\.git
+\.gitignore
+\.gitmodules
+README.*
+LICENSE.*
