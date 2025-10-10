@@ -252,7 +252,7 @@ eval "$(zoxide init zsh)"
 #-----------------------------------------
 #                 SSH
 #-----------------------------------------
-source $HOME/logos_projects/scripts/ssh_agent.sh
+source $HOME/scripts/ssh_agent.sh
 
 #-----------------------------------------
 #                 END
