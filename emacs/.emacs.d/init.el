@@ -226,3 +226,9 @@
   :ensure t
   :custom
   (hyprlang-ts-mode-indent-offset 4))
+
+;; QML mode
+(let ((qml-path "~/.emacs.d/elisp/qml-ts-mode"))
+  (when (file-directory-p qml-path)
+    (add-to-list 'load-path qml-path)
+    (require 'qml-ts-mode nil 'noerror)))
