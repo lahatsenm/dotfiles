@@ -210,7 +210,12 @@
           #'(lambda () (setq ispell-parser 'tex)))
 ;;---------------------------------------------
 
+;; Ocaml
 (let ((ocp-path (expand-file-name "~/.opam/default/share/emacs/site-lisp")))
   (when (file-directory-p ocp-path)
     (add-to-list 'load-path ocp-path)
     (require 'ocp-indent)))
+
+;; hyprlang tree-sitter grammar
+(add-to-list 'treesit-language-source-alist
+        '(hyprlang "https://github.com/tree-sitter-grammars/tree-sitter-hyprlang"))

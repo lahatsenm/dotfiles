@@ -25,6 +25,9 @@ emacs/.emacs.d/elpa/
 # eln cache
 emacs/.emacs.d/eln-cache/
 
+# tree-sitter
+emacs/.emacs.d/tree-sitter/
+
 # reftex files
 *.rel
 
