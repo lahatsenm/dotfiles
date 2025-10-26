@@ -10,6 +10,9 @@ auto-save-list
 tramp
 .\#*
 
+# ido
+ido*
+
 # Org-mode
 .org-id-locations
 *_archive
