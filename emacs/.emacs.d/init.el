@@ -217,5 +217,12 @@
     (require 'ocp-indent)))
 
 ;; hyprlang tree-sitter grammar
-(add-to-list 'treesit-language-source-alist
-        '(hyprlang "https://github.com/tree-sitter-grammars/tree-sitter-hyprlang"))
+(with-eval-after-load 'treesit
+  (add-to-list 'treesit-language-source-alist
+               '(hyprlang "https://github.com/tree-sitter-grammars/tree-sitter-hyprlang")))
+
+(use-package hyprlang-ts-mode
+  :if (require 'hyprlang-ts-mode nil 'noerror) ; only load if available
+  :ensure t
+  :custom
+  (hyprlang-ts-mode-indent-offset 4))

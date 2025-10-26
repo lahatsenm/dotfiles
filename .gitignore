@@ -3,6 +3,8 @@
 \#*\#
 .emacs.desktop
 .emacs.desktop.lock
+recentf
+smex-items
 *.elc
 auto-save-list
 tramp
@@ -27,6 +29,12 @@ emacs/.emacs.d/eln-cache/
 
 # tree-sitter
 emacs/.emacs.d/tree-sitter/
+
+# transient
+emacs/.emacs.d/transient/
+
+# elisp code from different places
+emacs/.emacs.d/elisp/
 
 # reftex files
 *.rel
