@@ -20,8 +20,8 @@
             move-text multiple-cursors nord-theme nordic-night-theme
             nordless-theme numeri pdf-tools resize-window rust-mode
             smex solarized-gruvbox-theme solarized-theme sudo-edit
-            tree-sitter typing-game typst-ts-mode yaml-mode yasnippet
-            zig-mode))
+            tree-sitter typing-game typst-ts-mode visual-replace
+            yaml-mode yasnippet zig-mode))
  '(pdf-view-incompatible-modes
    '(linum-mode linum-relative-mode helm-linum-relative-mode nlinum-mode
                 nlinum-hl-mode nlinum-relative-mode yalinum-mode
