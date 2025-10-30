@@ -20,6 +20,9 @@ ido*
 # flymake-mode
 *_flymake.*
 
+# multiple-cursors preferences
+.mc-lists.el
+
 # eshell files
 emacs/.emacs.d/eshell/history
 emacs/.emacs.d/eshell/lastdir
