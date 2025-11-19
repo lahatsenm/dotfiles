@@ -206,9 +206,8 @@ layout {
         // off
 
         width 1
-        // active-color "#ffc87f"
-        //active-color "#7DB3E2"
-        active-color "#2aa198"
+        
+        active-gradient from="#2aa198" to="#268bd2" angle=45
         inactive-color "#505050"
 
         // Color of the border around windows that request your attention.
