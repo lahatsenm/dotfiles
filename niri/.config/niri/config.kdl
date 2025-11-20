@@ -427,6 +427,13 @@ layer-rule {
     place-within-backdrop true
 }
 
+recent-windows {
+    binds {
+        Mod+Z { next-window; }
+        Mod+Shift+Z { previous-window; }
+    }
+}
+
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
     // in the end. To find an XKB name for a particular key, you may use a program
@@ -679,7 +686,7 @@ binds {
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
     // rather than stacked on top of each other.
-    Mod+Z { toggle-column-tabbed-display; }
+    ISO_Level3_Shift+Z { toggle-column-tabbed-display; }
 
     // Actions to switch layouts.
     // Note: if you uncomment these, make sure you do NOT have
