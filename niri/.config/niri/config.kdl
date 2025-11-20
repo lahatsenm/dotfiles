@@ -323,9 +323,6 @@ animations {
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
     slowdown 0.9
-    workspace-switch {
-        spring damping-ratio=1.000000 epsilon=0.000100 stiffness=2000;
-    }
 }
 
 // Window rules let you adjust behavior for individual windows.
