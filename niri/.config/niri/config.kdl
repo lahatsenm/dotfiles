@@ -74,7 +74,7 @@ input {
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    focus-follows-mouse // max-scroll-amount="0%"
+    focus-follows-mouse //max-scroll-amount="95%"
 }
 
 // You can configure outputs by their name, which you can find
@@ -120,7 +120,7 @@ input {
 layout {
     // Set gaps around windows in logical pixels.
     gaps 8
-
+    
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
     //   or right edge of the screen.
@@ -249,7 +249,7 @@ layout {
         softness 30
 
         // Spread expands the shadow.
-        spread 5
+        spread 6
 
         // Offset moves the shadow relative to the window.
         offset x=0 y=5
@@ -264,10 +264,10 @@ layout {
     // Top and bottom struts will simply add outer gaps in addition to the area occupied by
     // layer-shell panels and regular gaps.
     struts {
-        // left 64
-        // right 64
-        // top 64
-        // bottom 64
+        // left -8
+        // right -8
+        // top 8
+        // bottom 8
     }
 }
 
@@ -339,7 +339,6 @@ window-rule {
     // since this is the default config, and we want no false positives.
     // You can get away with just app-id="wezterm" if you want.
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    open-maximized true
     open-focused true
     default-column-width {}
 }
@@ -423,6 +422,11 @@ window-rule {
     min-height 787
 }
 
+layer-rule {
+    match namespace="^swww-daemon$"
+    place-within-backdrop true
+}
+
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
     // in the end. To find an XKB name for a particular key, you may use a program
@@ -445,8 +449,8 @@ binds {
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "increment" "5"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "decrement" "5"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "increment" "3"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "decrement" "3"; }
     XF86AudioMute        allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "mute"; }
 
     // I don't have this on my keyboard and don't know why I'm still putting it here xD
@@ -635,7 +639,7 @@ binds {
     // Makes the column "fill the rest of the space".
     Mod+Ctrl+F { expand-column-to-available-width; }
 
-    Mod+twosuperior { center-column; }
+    ISO_Level3_Shift+C { center-column; }
 
     // Center all fully visible columns on screen.
     //Mod+Ctrl+C { center-visible-columns; }
