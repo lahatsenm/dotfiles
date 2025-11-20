@@ -652,7 +652,7 @@ binds {
     // Makes the column "fill the rest of the space".
     Mod+Ctrl+F { expand-column-to-available-width; }
 
-    ISO_Level3_Shift+C { center-column; }
+    ISO_Level3_Shift+Tab { center-column; }
 
     // Center all fully visible columns on screen.
     //Mod+Ctrl+C { center-visible-columns; }
