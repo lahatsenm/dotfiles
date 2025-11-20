@@ -58,6 +58,9 @@ flycheck_*.el
 # server auth directory
 emacs/.emacs.d/server/
 
+# dms directory in niri
+niri/.config/niri/dms/
+
 # projectiles files
 .projectile
 
