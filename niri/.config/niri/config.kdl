@@ -709,8 +709,8 @@ binds {
     Mod+Shift+B hotkey-overlay-title="Restart dms" { spawn "dms" "restart";}
 
     // dms wallpaper manager
-    Mod+F9 hotkey-overlay-title="Next wallpaper" { spawn "~/scripts/niri-wallpaper-bridge.sh" "next"; }
-    Mod+Shift+F9 hotkey-overlay-title="Previous wallpaper" { spawn "~/scripts/niri-wallpaper-bridge.sh" "prev"; }
+    Mod+F9 hotkey-overlay-title="Next wallpaper" { spawn-sh "~/scripts/niri-wallpaper-bridge.sh next"; }
+    Mod+Shift+F9 hotkey-overlay-title="Previous wallpaper" { spawn-sh "~/scripts/niri-wallpaper-bridge.sh prev"; }
     Super+W hotkey-overlay-title="Open wallpaper manager" { spawn "dms" "ipc" "call" "dankdash" "wallpaper"; }
     Super+Shift+W hotkey-overlay-title="Syncing wallpaper" { spawn "~/scripts/niri-wallpaper-bridge.sh"; }
 
