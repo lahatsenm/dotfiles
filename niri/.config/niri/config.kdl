@@ -322,7 +322,7 @@ animations {
     // off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
-    slowdown 0.9
+    // slowdown 0.9
     workspace-switch {
         spring damping-ratio=1.0 stiffness=2000 epsilon=0.0001
     }
