@@ -5,6 +5,7 @@
 
 environment {
     XDG_MENU_PREFIX "plasma-"
+    DISPLAY ":0"
     QT_QPA_PLATFORM "wayland"
     QT_QPA_PLATFORMTHEME "qt5ct"
 }
@@ -686,7 +687,7 @@ binds {
 
     // Move the focused window between the floating and the tiling layout.
     Mod+T       { toggle-window-floating; }
-    Mod+Shift+T { switch-focus-between-floating-and-tiling; }
+    ISO_Level3_Shift+F { switch-focus-between-floating-and-tiling; }
 
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
