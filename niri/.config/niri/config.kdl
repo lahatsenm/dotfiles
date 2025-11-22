@@ -120,6 +120,11 @@ input {
 layout {
     // Set gaps around windows in logical pixels.
     gaps 8
+
+    // The effect of this is not apparently seen for now
+    // since I am using "swww-daemon" for the backdrop wallpaper management.
+    // So I put this just in case I change my mind about it.
+    background-color "transparent"
     
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
