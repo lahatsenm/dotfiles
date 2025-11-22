@@ -429,6 +429,7 @@ window-rule {
 }
 
 layer-rule {
+    //match namespace="^quickshell$"
     match namespace="^swww-daemon$"
     place-within-backdrop true
 }
