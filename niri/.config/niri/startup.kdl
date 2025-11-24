@@ -1,0 +1,27 @@
+// Add lines like this to spawn processes at startup.
+// Note that running niri as a session supports xdg-desktop-autostart,
+// which may be more convenient to use.
+// See the binds section below for more spawn examples.
+
+// This line starts waybar, a commonly used bar for Wayland compositors.
+//spawn-sh-at-startup "waybar --config ~/.config/waybar/niri/config --style ~/.config/waybar/niri/style.css"
+spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
+spawn-sh-at-startup "swww-daemon"
+//spawn-sh-at-startup "systemctl start NetworkManager"
+//spawn-sh-at-startup "~/scripts/wall.sh"
+spawn-sh-at-startup "dms run"
+//spawn-sh-at-startup "dunst &"
+//spawn-sh-at-startup "hypridle &"
+
+spawn-sh-at-startup "wezterm"
+spawn-sh-at-startup "emacs"
+spawn-sh-at-startup "zen-browser"
+spawn-sh-at-startup "dolphin"
+
+// To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
+// spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
+
+hotkey-overlay {
+    // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
+    skip-at-startup
+}

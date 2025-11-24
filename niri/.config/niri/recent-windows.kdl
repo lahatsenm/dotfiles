@@ -1,0 +1,6 @@
+recent-windows {
+    binds {
+        Mod+Z { next-window; }
+        Mod+Shift+Z { previous-window; }
+    }
+}
