@@ -12,14 +12,15 @@
  '(ido-enable-flex-matching t)
  '(package-selected-packages
    '(auctex beacon breadcrumb catppuccin-theme cmake-mode company
-            doom-themes dream-theme eshell-vterm expand-region
-            gameoflife gruber-darker-theme gruvbox-theme helm
-            hyprlang-ts-mode ido-at-point ido-complete-space-or-hyphen
-            ido-completing-read+ ido-hacks ido-select-window
-            ido-yes-or-no kdl-mode lsp-mode lua-mode luarocks
-            move-text multiple-cursors nord-theme nordic-night-theme
-            nordless-theme numeri pdf-tools resize-window rust-mode
-            smex solarized-gruvbox-theme solarized-theme sudo-edit
+            doom-themes dream-theme easy-theme-preview eshell-vterm
+            expand-region gameoflife gruber-darker-theme gruvbox-theme
+            helm hyprlang-ts-mode ido-at-point
+            ido-complete-space-or-hyphen ido-completing-read+
+            ido-hacks ido-select-window ido-yes-or-no kdl-mode
+            lsp-mode lua-mode luarocks move-text multiple-cursors
+            nord-theme nordic-night-theme nordless-theme numeri
+            pdf-tools resize-window rust-mode smex
+            solarized-gruvbox-theme solarized-theme sudo-edit
             tree-sitter typing-game typst-ts-mode visual-replace
             yaml-mode yasnippet zig-mode))
  '(pdf-view-incompatible-modes
