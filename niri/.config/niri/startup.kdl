@@ -16,7 +16,6 @@ spawn-sh-at-startup "dms run"
 spawn-sh-at-startup "wezterm"
 spawn-sh-at-startup "emacs"
 spawn-sh-at-startup "zen-browser"
-spawn-sh-at-startup "dolphin"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
