@@ -4,6 +4,7 @@
 // https://yalter.github.io/niri/Configuration:-Introduction
 
 include "environment.kdl"
+include "debug.kdl"
 include "input.kdl"
 include "outputs.kdl"
 include "layout.kdl"
@@ -13,4 +14,5 @@ include "animations.kdl"
 include "rules.kdl"
 include "miscellaneous.kdl"
 include "recent-windows.kdl"
-include "binds.kdl"
+//include "dms-binds.kdl"
+include "noctalia-binds.kdl"

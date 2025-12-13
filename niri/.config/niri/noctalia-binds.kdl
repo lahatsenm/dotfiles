@@ -1,4 +1,5 @@
 binds {
+    // CONTAINS NOCTALIA SPECIFIC KEY BINDINGS AMONG OTHER THINGS.
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
     // in the end. To find an XKB name for a particular key, you may use a program
     // like wev.
@@ -20,9 +21,9 @@ binds {
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "increment" "3"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "decrement" "3"; }
-    XF86AudioMute        allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "mute"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "increase"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "decrease"; }
+    XF86AudioMute        allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
 
     // I don't have this on my keyboard and don't know why I'm still putting it here xD
     XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
@@ -37,8 +38,8 @@ binds {
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
     // but you need to manually put each argument in separate "" quotes.
-    XF86MonBrightnessUp allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
@@ -266,38 +267,32 @@ binds {
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
 
-    // dms settings
-    Super+S hotkey-overlay-title="Show Settings" { spawn "dms" "ipc" "call" "settings" "toggle";}
+    // Settings
+    Super+S hotkey-overlay-title="Show Settings" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "settings" "toggle";}
 
-    // dms lockscreen
-    Mod+F12 hotkey-overlay-title="Lock the Screen" { spawn "dms" "ipc" "call" "lock" "lock";}
+    // Control Center
+    Super+C hotkey-overlay-title="Control Center" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "controlCenter" "toggle";}
 
-    // idle inhibitor
-    Super+I hotkey-overlay-title="Toggle inhibitor" { spawn "dms" "ipc" "call" "inhibit" "toggle";}
+    // lockscreen
+    Mod+F12 hotkey-overlay-title="Lock Screen" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock";}
 
-    // dms app launcher
-    Mod+Space hotkey-overlay-title="Run an Application" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    // Idle inhibitor
+    Super+I hotkey-overlay-title="Toggle inhibitor" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "idleInhibitor" "toggle";}
 
-    // Restart dms
-    Mod+Shift+B hotkey-overlay-title="Restart dms" { spawn "dms" "restart";}
+    // App launcher
+    Mod+Space hotkey-overlay-title="Application Launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
 
-    // dms wallpaper manager
-    Mod+F9 hotkey-overlay-title="Next wallpaper" { spawn-sh "~/scripts/niri-wallpaper-bridge.sh next"; }
-    Mod+Shift+F9 hotkey-overlay-title="Previous wallpaper" { spawn-sh "~/scripts/niri-wallpaper-bridge.sh prev"; }
-    Super+W hotkey-overlay-title="Open wallpaper manager" { spawn "dms" "ipc" "call" "dankdash" "wallpaper"; }
-    Super+Shift+W hotkey-overlay-title="Syncing wallpaper" { spawn "~/scripts/niri-wallpaper-bridge.sh"; }
+    // Wallpaper Manager
+    // Mod+F9 hotkey-overlay-title="Next wallpaper" { spawn-sh "~/scripts/niri-wallpaper-bridge.sh next"; }
+    // Mod+Shift+F9 hotkey-overlay-title="Previous wallpaper" { spawn-sh "~/scripts/niri-wallpaper-bridge.sh prev"; }
+    Super+W hotkey-overlay-title="Open wallpaper Selector" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "wallpaper" "toggle"; }
+    // Super+Shift+W hotkey-overlay-title="Syncing wallpaper" { spawn "~/scripts/niri-wallpaper-bridge.sh"; }
 
-    // dms dashboard
-    Super+D hotkey-overlay-title=null { spawn "dms" "ipc" "call" "dash" "toggle" ""; }
+    // clipboard history
+    Super+V hotkey-overlay-title=null { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
 
-    // dms clipboard
-    Super+V hotkey-overlay-title=null { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
-
-    // dms notifications
-    Super+N hotkey-overlay-title=null { spawn "dms" "ipc" "call" "notifications" "toggle"; }
-
-    // dms notepad
-    Super+O hotkey-overlay-title=null { spawn "dms" "ipc" "call" "notepad" "toggle"; }
+    // Notifications
+    Super+N hotkey-overlay-title=null { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "notifications" "toggleHistory"; }
 
     // Color picker
     Super+P hotkey-overlay-title=null { spawn-sh "~/scripts/pickcolor.sh"; }
@@ -313,7 +308,7 @@ binds {
     Mod+Shift+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
-    Mod+Shift+Q hotkey-overlay-title="Show Power Menu" { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
+    Mod+Shift+Q hotkey-overlay-title="Session Menu" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
     Ctrl+Alt+Delete { quit; }
 
     // Powers off the monitors. To turn them back on, do any input like
