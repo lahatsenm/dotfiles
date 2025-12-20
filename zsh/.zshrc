@@ -116,6 +116,7 @@ WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
 
 # Keybindings
 bindkey -e                                        # emacs key bindings
+bindkey -s ^s "tmux-sessionizer\n"
 
 # Enable completion features
 autoload -Uz compinit
