@@ -76,3 +76,7 @@ network-security.data
 # gnu stow files
 #.stowrc
 #.stow-local-ignore
+
+# some auto-generated directories
+hypr/.config/hypr/scheme/
+wezterm/.config/wezterm/colors/
