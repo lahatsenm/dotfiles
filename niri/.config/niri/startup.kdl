@@ -7,6 +7,7 @@
 //spawn-sh-at-startup "waybar --config ~/.config/waybar/niri/config --style ~/.config/waybar/niri/style.css"
 spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-sh-at-startup "swww-daemon"
+spawn-sh-at-startup "swayidle" 
 //spawn-sh-at-startup "systemctl start NetworkManager"
 //spawn-sh-at-startup "~/scripts/wall.sh"
 //spawn-sh-at-startup "dms run"

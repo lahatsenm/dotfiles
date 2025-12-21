@@ -1,0 +1,2 @@
+timeout 3 'qs -c noctalia-shell ipc call lockScreen lock' \\
+idlehint 3
