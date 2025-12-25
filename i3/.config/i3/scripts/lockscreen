@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+I3LOCK_ARGS=(
+    --nofork
+    --blur=1
+    --clock
+    --indicator
+    --ring-width=15.0
+    --radius=200
+    --inside-color=000000aa
+    --ring-color=4C7899FF
+    --line-color=00000000
+    --date-color=4C7899FF
+    --time-color=4C7899FF
+    "--time-str=%I:%M:%S %p"
+    "--date-str=%A, %B %d, %Y"
+    --time-font=JetBrainsMono
+    --date-font=JetBrainsMono
+    --verif-font=JetBrainsMono
+    --wrong-font=JetBrainsMono
+    --greeter-font=JetBrainsMono
+    --time-size=40
+    --date-size=20
+)
+
+exec i3lock "${I3LOCK_ARGS[@]}"
