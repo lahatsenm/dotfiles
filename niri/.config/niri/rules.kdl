@@ -94,8 +94,8 @@ window-rule {
 
 layer-rule {
     //match namespace="^quickshell$"
-    //match namespace="^noctalia-wallpaper*"
+    match namespace="^noctalia-wallpaper*"
     //match namespace="^noctalia-overview*"
-    match namespace="^swww-daemon$"
+    //match namespace="^swww-daemon$"
     place-within-backdrop true
 }
