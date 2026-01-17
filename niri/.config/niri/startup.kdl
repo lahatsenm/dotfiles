@@ -12,6 +12,7 @@ spawn-sh-at-startup "swayidle"
 //spawn-sh-at-startup "~/scripts/wall.sh"
 //spawn-sh-at-startup "dms run"
 spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "walker" "--gapplication-service"
 //spawn-sh-at-startup "dunst &"
 //spawn-sh-at-startup "hypridle &"
 

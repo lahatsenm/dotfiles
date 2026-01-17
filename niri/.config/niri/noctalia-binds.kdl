@@ -280,7 +280,8 @@ binds {
     Super+I hotkey-overlay-title="Toggle inhibitor" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "idleInhibitor" "toggle";}
 
     // App launcher
-    Mod+Space hotkey-overlay-title="Application Launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    //Mod+Space hotkey-overlay-title="Application Launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    Mod+Space hotkey-overlay-title="Application Launcher: walker" { spawn "walker"; }
 
     // Wallpaper Manager
     // Mod+F9 hotkey-overlay-title="Next wallpaper" { spawn-sh "~/scripts/niri-wallpaper-bridge.sh next"; }
