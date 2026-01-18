@@ -258,3 +258,6 @@ source $HOME/scripts/ssh_agent.sh
 #-----------------------------------------
 #                 END
 #-----------------------------------------
+
+# opencode
+export PATH=/home/logos/.opencode/bin:$PATH

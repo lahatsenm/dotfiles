@@ -53,7 +53,7 @@ layout {
     // You can change how the focus ring looks.
     focus-ring {
         // Uncomment this line to disable the focus ring.
-        off
+        on
 
         // How many logical pixels the ring extends out from the windows.
         width 1
@@ -93,8 +93,7 @@ layout {
     border {
         // The settings are the same as for the focus ring.
         // If you enable the border, you probably want to disable the focus ring.
-        // off
-        on
+        off
         width 1
         
         active-gradient from="#2aa198" to="#268bd2" angle=45
