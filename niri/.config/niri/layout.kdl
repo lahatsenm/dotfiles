@@ -56,7 +56,7 @@ layout {
         on
 
         // How many logical pixels the ring extends out from the windows.
-        width 1
+        width 4
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -65,7 +65,9 @@ layout {
 
         // Color of the ring on the active monitor.
         // active-color "#7fc8ff"
-        active-gradient from="#2aa198" to="#268bd2" angle=45
+        // active-color "#EB9CAE"
+        active-color "#F88379"
+        //active-gradient from="#2aa198" to="#268bd2" angle=45
 
         // Color of the ring on inactive monitors.
         //
