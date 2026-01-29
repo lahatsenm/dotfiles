@@ -16,10 +16,11 @@ spawn-at-startup "walker" "--gapplication-service"
 //spawn-sh-at-startup "dunst &"
 //spawn-sh-at-startup "hypridle &"
 
-//spawn-sh-at-startup "wezterm"
+spawn-sh-at-startup "wezterm"
 spawn-sh-at-startup "emacs"
-spawn-sh-at-startup "zen-browser"
+//spawn-sh-at-startup "zen-browser"
 //spawn-sh-at-startup "thorium-browser"
+spawn-sh-at-startup "brave"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
