@@ -7,6 +7,7 @@ export olib=$own/olib
 export oinc=$own/oinc
 export ebrid=/run/media/logos/Data/EBRID
 export cs=$ebrid/COMP_SCI
+export learning=$ebrid/COMP_SCI/Learning
 export lp=~/logos_projects
 export proj=$lp/projects
 export edits=$proj/sh/Edits
