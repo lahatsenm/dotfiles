@@ -61,6 +61,9 @@ emacs/.emacs.d/server/
 # dms directory in niri
 niri/.config/niri/dms/
 
+# dms directory in mango
+mango/.config/mango/dms/
+
 # projectiles files
 .projectile
 
