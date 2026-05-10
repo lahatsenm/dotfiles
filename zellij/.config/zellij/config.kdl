@@ -1,4 +1,5 @@
 keybinds clear-defaults=true {
+    unbind "Ctrl g"
     normal {
         bind "Alt 1" { GoToTab 1; SwitchToMode "normal"; }
         bind "Alt 2" { GoToTab 2; SwitchToMode "normal"; }
@@ -9,9 +10,25 @@ keybinds clear-defaults=true {
         bind "Alt 7" { GoToTab 7; SwitchToMode "normal"; }
         bind "Alt 8" { GoToTab 8; SwitchToMode "normal"; }
         bind "Alt 9" { GoToTab 9; SwitchToMode "normal"; }
+
+        bind "Ctrl h" { MoveFocus "left"; SwitchToMode "normal"; }
+        bind "Ctrl j" { MoveFocus "down"; SwitchToMode "normal"; }
+        bind "Ctrl k" { MoveFocus "up"; SwitchToMode "normal"; }
+        bind "Ctrl l" { MoveFocus "right"; SwitchToMode "normal"; }
+        
+        bind "Alt e" {
+            LaunchOrFocusPlugin "session-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "normal"
+        }
+        
+        bind "Ctrl u" { SwitchToMode "move"; }
+        bind "Ctrl space" { SwitchToMode "locked"; }
     }
     locked {
-        bind "Ctrl g" { SwitchToMode "normal"; }
+        bind "Ctrl space" { SwitchToMode "normal"; }
     }
     pane {
         bind "left" { MoveFocus "left"; }
@@ -90,7 +107,7 @@ keybinds clear-defaults=true {
         bind "up" { MovePane "up"; }
         bind "right" { MovePane "right"; }
         bind "h" { MovePane "left"; }
-        bind "Ctrl h" { SwitchToMode "normal"; }
+        bind "Ctrl u" { SwitchToMode "normal"; }
         bind "j" { MovePane "down"; }
         bind "k" { MovePane "up"; }
         bind "l" { MovePane "right"; }
@@ -149,8 +166,27 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "normal"
         }
+
+        bind "l" {
+            LaunchOrFocusPlugin "zellij:layout-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "normal"
+        }
         bind "space" { SwitchToMode "normal"; }
     }
+
+    shared_except "locked" {
+        bind "Alt s" {
+            LaunchOrFocusPlugin "file:~/.config/zellij/plugins/room.wasm" {
+                floating true
+                ignore_case true
+                quick_jump true
+            }
+        }
+    }
+    
     shared_except "locked" {
         bind "Alt left" { MoveFocusOrTab "left"; }
         bind "Alt down" { MoveFocus "down"; }
@@ -175,7 +211,7 @@ keybinds clear-defaults=true {
         bind "Ctrl q" { Quit; }
     }
     shared_except "locked" "move" {
-        bind "Ctrl h" { SwitchToMode "move"; }
+        bind "Ctrl u" { SwitchToMode "move"; }
     }
     shared_except "locked" "session" {
         bind "Ctrl o" { SwitchToMode "session"; }
@@ -266,7 +302,12 @@ keybinds clear-defaults=true {
 // changing these requires a restart to take effect
 plugins {
     about location="zellij:about"
-    compact-bar location="zellij:compact-bar"
+    compact-bar location="zellij:compact-bar" {
+        tooltip "F1"
+    }
+    // compact-bar location="https://github.com/ivoronin/zellij-tab-bar-indexed/releases/latest/download/compact-bar.wasm" {
+    //     show_tab_indices true
+    // }
     configuration location="zellij:configuration"
     filepicker location="zellij:strider" {
         cwd "/"
@@ -275,16 +316,33 @@ plugins {
     session-manager location="zellij:session-manager"
     status-bar location="zellij:status-bar"
     strider location="zellij:strider"
-    tab-bar location="zellij:tab-bar"
+    //tab-bar location="zellij:tab-bar"
+    tab-bar location="https://github.com/ivoronin/zellij-tab-bar-indexed/releases/latest/download/tab-bar.wasm" {
+        show_tab_indices true
+    }
     welcome-screen location="zellij:session-manager" {
         welcome_screen true
     }
+    // zjstatus-hints location="file:/home/logos/.config/zellij/plugins/zjstatus-hints.wasm" {
+    //     // Maximum number of characters to display
+    //     max_length 0 // 0 = unlimited
+    //     // String to append when truncated
+    //     overflow_str "..." // default
+    //     // Name of the pipe for zjstatus integration
+    //     pipe_name "zjstatus_hints" // default
+    //     // Hide hints in base mode (a.k.a. default mode)
+    //     // E.g. if you have set default_mode to "locked", then
+    //     // you can hide hints in the locked mode by setting this to true
+    //     hide_in_base_mode true // default
+    // }
 }
 
 // Plugins to load in the background when a new session starts
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
+    "zellij:link"
+    //    zjstatus-hints
 }
 web_client {
     font "monospace"
@@ -295,13 +353,57 @@ web_client {
 //   - true
 //   - false (Default)
 // 
-simplified_ui true
+//simplified_ui true
  
 // Choose the theme that is specified in the themes section.
 // Default: default
-// 
+//
+
+themes {
+    kanagawa_wave {
+        bg "#223249"
+        fg "#54546D"
+        black "#181816"
+        red "#C34043"
+        green "#76946A"
+        yellow "#C0A36E"
+        blue "#7E9CD8"
+        magenta "#957FB8"
+        cyan "#6A9589"
+        white "#54546D"
+        orange "#FFA066"
+    }
+    kanagawa_dragon {
+        fg "#C8C093"
+        bg "#181616"
+        black "#282727"
+        red "#c4746e"
+        green "#8a9a7b"
+        yellow "#c4b28a"
+        blue "#8ba4b0"
+        magenta "#a292a3"
+        cyan "#8ea4a2"
+        white "#C8C093"
+        orange "#FFA066"
+    }
+    solarized-dark {
+        fg 253 246 227
+        bg 0 43 54
+        black 7 54 66
+        red 220 50 47
+        green 133 153 0
+        yellow 181 137 0
+        blue 38 139 210
+        magenta 211 54 130
+        cyan 42 161 152
+        white 238 232 213
+        orange 203 75 22
+    }
+}
+
 //theme "dracula"
-//theme "solarized-dark"
+theme "solarized-dark"
+//theme "kanagawa_wave"
  
 // Choose the base input mode of zellij.
 // Default: normal
@@ -320,7 +422,7 @@ default_shell "zsh"
 // The name of the default layout to load on startup
 // Default: "default"
 // 
-// default_layout "compact"
+default_layout "compact"
  
 // The folder in which Zellij will look for layouts
 // (Requires restart)
@@ -436,13 +538,13 @@ default_shell "zsh"
 //   - true
 //   - false (default)
 // 
-// serialize_pane_viewport false
+serialize_pane_viewport true
  
 // Scrollback lines to serialize along with the pane viewport when serializing sessions, 0
 // defaults to the scrollback size. If this number is higher than the scrollback size, it will
 // also default to the scrollback size. This does nothing if `serialize_pane_viewport` is not true.
 // 
-// scrollback_lines_to_serialize 10000
+scrollback_lines_to_serialize 10000
  
 // Enable or disable the rendering of styled and colored underlines (undercurl).
 // May need to be disabled for certain unsupported terminals
@@ -453,7 +555,7 @@ default_shell "zsh"
  
 // How often in seconds sessions are serialized
 // 
-// serialization_interval 10000
+serialization_interval 60
  
 // Enable or disable writing of session metadata to disk (if disabled, other sessions might not know
 // metadata info on this session)
@@ -522,7 +624,7 @@ default_shell "zsh"
 // Whether to show tips on startup
 // Default: true
 // 
-// show_startup_tips false
+show_startup_tips false
  
 // Whether to show release notes on first version run
 // Default: true

@@ -58,12 +58,13 @@ flycheck_*.el
 # server auth directory
 emacs/.emacs.d/server/
 
-# dms directory in niri and hyprland
+# dms directory in niri, hyprland and mango
 niri/.config/niri/dms/
 hypr/.config/hypr/dms/
-
-# dms directory in mango
 mango/.config/mango/dms/
+
+# plugins directory in zellij
+/zellij/.config/zellij/plugins
 
 # projectiles files
 .projectile
