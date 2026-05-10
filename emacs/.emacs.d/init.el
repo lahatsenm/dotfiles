@@ -3,6 +3,11 @@
                          ("melpa" . "https://melpa.org/packages/")
                          ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 
+;; Fix emacs window issue in niri
+;; https://github.com/niri-wm/niri/issues/2632
+(setopt frame-inhibit-implied-resize t)
+(setopt frame-resize-pixelwise t)
+
 (package-initialize)
 
 ;; Custom settings in "custom.el"
@@ -15,7 +20,6 @@
 (unless package-archive-contents
   (package-refresh-contents))
 (package-install-selected-packages)
-
 
 ;; Theme
 ;; https://www.reddit.com/r/emacs/comments/rj1wce/how_to_get_colors_and_themes_working_correctly/
@@ -33,6 +37,7 @@
   (interactive)
   (mapcar 'disable-theme custom-enabled-themes))
 
+;;(load-theme-cleanly 'kanagawa-dragon)
 (load-theme-cleanly 'solarized-dark-high-contrast)
 
 ;;----------------------------------------------
@@ -59,12 +64,12 @@
 ;; Font configuration
 (add-to-list 'default-frame-alist '(font . "TX-02-XlabMono-14.3"))
 (set-face-attribute 'default nil :font "TX-02-XlabMono" :height 143)
-;;(set-face-attribute 'default nil :font "JetBrainsMono" :height 143 :foreground "#E0E0E0")
-;;(set-face-attribute 'default nil :font "CascadiaCode" :height 143 :foreground "#E0E0E0")
-;;(set-face-attribute 'default nil :font "BerkeleyMono" :height 143 :foreground "#E0E0E0")
-;;(set-face-attribute 'default nil :font "RobotoMono" :height 143 :foreground "#E0E0E0")
-;;(set-face-attribute 'default nil :font "Iosevka" :height 180 :foreground "#E0E0E0")
-;;(set-face-attribute 'default nil :font "comicMono" :height 143 :foreground "#E0E0E0")
+;;(set-face-attribute 'default nil :font "JetBrainsMono" :height 143)
+;;(set-face-attribute 'default nil :font "CascadiaCode" :height 143)
+;;(set-face-attribute 'default nil :font "BerkeleyMono" :height 143)
+;;(set-face-attribute 'default nil :font "RobotoMono" :height 143)
+;;(set-face-attribute 'default nil :font "Iosevka" :height 180)
+;;(set-face-attribute 'default nil :font "comicMono" :height 143)
 
 ;; Fallback fonts
 (set-fontset-font t 'unicode "Noto Sans Symbols2" nil 'append)

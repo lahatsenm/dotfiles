@@ -11,18 +11,18 @@
  '(delete-selection-mode t)
  '(ido-enable-flex-matching t)
  '(package-selected-packages
-   '(auctex beacon breadcrumb catppuccin-theme cmake-mode company
-            doom-themes dream-theme easy-theme-preview eshell-vterm
-            expand-region gameoflife gruber-darker-theme gruvbox-theme
-            helm hyprlang-ts-mode ido-at-point
-            ido-complete-space-or-hyphen ido-completing-read+
-            ido-hacks ido-select-window ido-yes-or-no kdl-mode
-            lsp-mode lua-mode luarocks move-text multiple-cursors
-            nord-theme nordic-night-theme nordless-theme numeri
-            pdf-tools resize-window rust-mode smex
-            solarized-gruvbox-theme solarized-theme sudo-edit
-            tree-sitter typing-game typst-ts-mode visual-replace
-            yaml-mode yasnippet zig-mode))
+   '(0x0 auctex beacon breadcrumb catppuccin-theme cmake-mode company
+         doom-themes dream-theme easy-theme-preview eshell-vterm
+         expand-region gameoflife gruber-darker-theme gruvbox-theme
+         helm hyprlang-ts-mode ido-at-point
+         ido-complete-space-or-hyphen ido-completing-read+ ido-hacks
+         ido-select-window ido-yes-or-no kanagawa-themes kdl-mode
+         lsp-mode lua-mode luarocks move-text multiple-cursors
+         nord-theme nordic-night-theme nordless-theme numeri pdf-tools
+         resize-window rust-mode smex solarized-gruvbox-theme
+         solarized-theme spatial-window sudo-edit tree-sitter
+         typing-game typst-ts-mode visual-replace yaml-mode yasnippet
+         zig-mode))
  '(pdf-view-incompatible-modes
    '(linum-mode linum-relative-mode helm-linum-relative-mode nlinum-mode
                 nlinum-hl-mode nlinum-relative-mode yalinum-mode

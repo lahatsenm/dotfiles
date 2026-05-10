@@ -64,7 +64,7 @@ hypr/.config/hypr/dms/
 mango/.config/mango/dms/
 
 # plugins directory in zellij
-/zellij/.config/zellij/plugins
+zellij/.config/zellij/plugins
 
 # projectiles files
 .projectile
@@ -85,3 +85,5 @@ network-security.data
 # some auto-generated directories
 hypr/.config/hypr/scheme/
 wezterm/.config/wezterm/colors/
+emacs/.emacs.d/themes/
+nvim/.config/nvim/lua/plugins/
