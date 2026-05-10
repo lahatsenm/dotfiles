@@ -117,6 +117,7 @@ WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
 # Keybindings
 bindkey -e                                        # emacs key bindings
 bindkey -s ^s "tmux-sessionizer\n"
+#bindkey -s '^z' 'zellij-sessionizer\n'
 
 # Enable completion features
 autoload -Uz compinit
@@ -175,8 +176,6 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     export LS_COLORS="$LS_COLORS:ow=30;44:" # fix ls color for folders with 777 permissions
 
-    alias eza='eza --color=auto'
-    alias ls=eza
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
 
@@ -222,10 +221,28 @@ if [ -f ~/.zshenv ]; then
     . ~/.zshenv
 fi
 
+# zellij thing
+#zellij_tab_name_update() {
+#    if [[ -n $ZELLIJ ]]; then
+#        local current_dir=$PWD
+#        if [[ $current_dir == $HOME ]]; then
+#            current_dir="~"
+#        else
+#            current_dir=${current_dir##*/}
+#        fi
+#        command nohup zellij action rename-tab $current_dir >/dev/null 2>&1
+#    fi
+#}
+#
+#zellij_tab_name_update
+#chpwd_functions+=(zellij_tab_name_update)
+
 #-----------------------------------------
 #                 ALIASES
 #-----------------------------------------
 # Use eza instead of ls when ls'ing
+alias eza='eza --color=auto'
+alias ls=eza
 alias ll='eza --long --links'  #'ls -l'
 alias lla='eza --long --links --all'  #'ls -l'
 alias la='eza --all' #'ls -A'
@@ -237,6 +254,8 @@ alias treea='eza --tree --all'
 alias treela='eza --long --links --tree --all'
 # tmux
 alias tmux='tmux -u'
+# Zellij
+alias zj='zellij'
 # Use trash instead of rm when rm'ing
 alias rm='trash -v'
 #-----------------------------------------
@@ -255,9 +274,33 @@ eval "$(zoxide init zsh)"
 #-----------------------------------------
 source $HOME/scripts/ssh_agent.sh
 
+# function sesh-sessions() {
+#   {
+#     exec </dev/tty
+#     exec <&1
+#     local session
+#     session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+#     zle reset-prompt > /dev/null 2>&1 || true
+#     [[ -z "$session" ]] && return
+#     sesh connect $session
+#   }
+# }
+
+# zle     -N             sesh-sessions
+# bindkey -M emacs '\es' sesh-sessions
+# bindkey -M vicmd '\es' sesh-sessions
+# bindkey -M viins '\es' sesh-sessions
+
 #-----------------------------------------
 #                 END
 #-----------------------------------------
 
 # opencode
 export PATH=/home/logos/.opencode/bin:$PATH
+
+# bun completions
+[ -s "/home/logos/.bun/_bun" ] && source "/home/logos/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
