@@ -26,6 +26,8 @@ config.audible_bell = "Disabled"
 -- config.color_scheme = "GruvboxDark"
 -- config.color_scheme = 'nord'
 config.color_scheme = 'Solarized (dark) (terminal.sexy)'
+-- config.color_scheme = 'Digerati (terminal.sexy)'
+-- config.color_scheme = 'Kanagawa Dragon (Gogh)'
 
 -- Set tab_bar colors to solarized theme
 config.colors = {
@@ -83,7 +85,8 @@ config.font = wezterm.font_with_fallback({
          family = "TX-02-XlabMono",
          harfbuzz_features = { "ss02" },
       },
-      
+
+      "Cascadia Code",
       "Noto Sans Symbols2",      -- good fallback for misc symbols
       "Noto Sans CJK KR",        -- covers Korean/circled glyphs
       "Symbols Nerd Font Mono",
