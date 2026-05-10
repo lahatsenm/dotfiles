@@ -19,5 +19,5 @@ gsettings set org.gnome.desktop.interface text-scaling-factor
 # Permission authentication
 /usr/lib/polkit-kde-authentication-agent-1 &
 
-# Use Dms shell
-dms run &
+# Status bar
+waybar --config ~/.config/waybar/mango/config --style ~/.config/waybar/mango/style.css &
