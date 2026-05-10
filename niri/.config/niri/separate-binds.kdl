@@ -1,0 +1,5 @@
+binds {
+    // Other keybindings not common and not related to quickshell applications but might conflict with them.
+    Super+N hotkey-overlay-title="Notification Center" { spawn "swaync-client" "-t" "-sw";}
+    Mod+F12 hotkey-overlay-title="Lock Screen" { spawn "hyprlock";}
+}

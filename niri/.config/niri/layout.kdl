@@ -71,8 +71,9 @@ layout {
         active-color "#F33A6A" // Rose
         //active-color "#F44C78" // Bright Rose
         //active-color "#F55F86" // Brighter Rose
-        
+
         //active-gradient from="#2aa198" to="#268bd2" angle=45
+        //active-gradient from="#33ccff" to="#00ff99" angle=45 // hyprland's default border color
 
         // Color of the ring on inactive monitors.
         //
@@ -80,7 +81,7 @@ layout {
         // where you can see its inactive-color is on other monitors.
         //inactive-color "#505050"
         inactive-color "transparent"
-
+        urgent-color "#9b0000"
         // You can also use gradients. They take precedence over solid colors.
         // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
         // The angle is the same as in linear-gradient, and is optional,
