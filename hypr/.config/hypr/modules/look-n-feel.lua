@@ -2,7 +2,7 @@
 hl.config({
     general = {
         gaps_in  = 5,
-        gaps_out = 20,
+        gaps_out = 10,
 
         border_size = 2,
 
@@ -21,7 +21,7 @@ hl.config({
     },
 
     decoration = {
-        rounding       = 10,
+        rounding       = 6,
         rounding_power = 2,
 
         -- Change transparency of focused and unfocused windows
@@ -112,6 +112,6 @@ hl.config({
 hl.config({
     scrolling = {
        fullscreen_on_one_column = false,
-       explicit_column_widths = {0.5, 0.8, 0.98},
+       explicit_column_widths = "0.5, 0.8, 0.98",
     },
 })

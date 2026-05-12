@@ -6,12 +6,14 @@
 
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 
+local vars = require("modules.variables")
+
 hl.on("hyprland.start", function () 
-  hl.exec_cmd("dms run")
-  hl.exec_cmd("vicinae server")
-  hl.exec_cmd("/usr/lib/polkit-kde-authentication-agent-1")
+  hl.exec_cmd(vars.statusBar)
+  hl.exec_cmd(vars.launcherDaemon)
+  hl.exec_cmd(vars.polkit)
   hl.exec_cmd("hyprpm reload -n")
   hl.exec_cmd("flameshot & swayidle")
-  hl.exec_cmd("emacs")
-  hl.exec_cmd("brave")
+  hl.exec_cmd(vars.editor)
+  hl.exec_cmd(vars.browser)
 end)

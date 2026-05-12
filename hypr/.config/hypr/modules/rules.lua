@@ -33,8 +33,8 @@ hl.window_rule({
 
 hl.window_rule({
       match = {
-         class = "^org\.kde\.dolphin$",
-      }
+         class = "^org.kde.dolphin$",
+      },
 
       workspace = "3 silent",
 })
@@ -42,15 +42,15 @@ hl.window_rule({
 hl.window_rule({
       match = {
          class = "^brave-browser$",
-      }
+      },
 
       workspace = "2 silent",
 })
 
 hl.window_rule({
       match = {
-         class = "^org\.pulseaudio\.pavucontrol$",
-      }
+         class = "^pavucontrol-qt$",
+      },
 
       float = true,
       size = {842, 512},
@@ -58,8 +58,8 @@ hl.window_rule({
 
 hl.window_rule({
       match = {
-         class = "^org\.gnome\.Calendar$",
-      }
+         class = "^org.gnome.Calendar$",
+      },
 
       float = true,
       size = {1109, 799},
@@ -67,8 +67,8 @@ hl.window_rule({
 
 hl.window_rule({
       match = {
-         class = "^io\.missioncenter\.MissionCenter$",
-      }
+         class = "^io.missioncenter.MissionCenter$",
+      },
 
       float = true,
       size = {1160, 761},
@@ -77,7 +77,7 @@ hl.window_rule({
 hl.window_rule({
       match = {
          class = "waypaper",
-      }
+      },
 
       float = true,
       size = {882, 965},
@@ -85,8 +85,8 @@ hl.window_rule({
 
 hl.window_rule({
       match = {
-         class = "^org\.kde\.gwenview$",
-      }
+         class = "^org.kde.gwenview$",
+      },
 
       float = true,
       size = {925, 1001},
@@ -94,8 +94,8 @@ hl.window_rule({
 
 hl.window_rule({
       match = {
-         class = "^io\.github\.Qalculate\.qalculate-qt$",
-      }
+         class = "^io.github.Qalculate.qalculate-qt$",
+      },
 
       float = true,
       size = {1104, 787},
@@ -104,7 +104,7 @@ hl.window_rule({
 hl.window_rule({
       match = {
          float = true,
-      }
+      },
 
       animation = "popin",
 })
