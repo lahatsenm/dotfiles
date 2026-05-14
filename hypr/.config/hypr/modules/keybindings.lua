@@ -31,7 +31,8 @@ hl.bind(vars.mainMod .. " + CTRL + LEFT",  hl.dsp.window.resize({ x = -30, y = 0
 hl.bind(vars.mainMod .. " + CTRL + RIGHT",  hl.dsp.window.resize({ x = 30, y = 0, relative = true }))
 hl.bind(vars.mainMod .. " + CTRL + UP",  hl.dsp.window.resize({ x = 0, y = -30, relative = true }))
 hl.bind(vars.mainMod .. " + CTRL + DOWN",  hl.dsp.window.resize({ x = 0 , y = 30, relative = true }))
-
+hl.bind("MOD5 + O",  hl.dsp.window.cycle_next({ floating = true }))
+hl.bind("MOD5 + P",  hl.dsp.window.cycle_next({ tiled = true }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
@@ -82,8 +83,8 @@ hl.bind(vars.mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(vars.mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 
 -- and this is the keyboard version
-hl.bind("MOD5 + O",   hl.dsp.focus({ workspace = "e+1" }))
-hl.bind("MOD5 + P",   hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(vars.mainMod .. " + PRIOR", hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(vars.mainMod .. " + NEXT",  hl.dsp.focus({ workspace = "e+1" }))
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(vars.mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
