@@ -22,3 +22,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # Auto-Warpify
 [[ "$-" == *i* ]] && printf 'P$f{"hook": "SourcedRcFileForWarp", "value": { "shell": "bash", "uname": "Linux" }}œ' 
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/logos/.local/bin:$PATH"

@@ -3,6 +3,7 @@
 -----------------------------------
 require("modules.variables")
 require("modules.permissions")
+require("modules.plugins.dynamic-cursors")
 require("modules.monitors")
 require("modules.autostart")
 require("modules.environment")

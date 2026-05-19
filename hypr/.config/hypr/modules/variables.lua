@@ -10,7 +10,7 @@ M.launcherDaemon = "vicinae server"
 M.menu           = "vicinae toggle"
 M.statusBar      = "dms run"
 M.polkit         = "/usr/lib/polkit-kde-authentication-agent-1"
-M.idleDaemon     = "hypridle"
+M.idleDaemon     = "swayidle"
 M.screenShot     = "flameshot"
 
 M.mainMod        = "ALT"
