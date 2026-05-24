@@ -203,7 +203,7 @@ bindsym $mod+Right split h
 bindsym $mod+Down split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+Tab fullscreen toggle
+bindsym $mod+Escape fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 # EMACS! EMACS
@@ -216,7 +216,7 @@ bindsym $mod+t floating toggle
 bindsym $mod+Up floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+Shift+t focus mode_toggle
+bindsym ISO_Level3_Shift+f focus mode_toggle
 
 # focus the parent container
 #bindsym $mod+a focus parent
