@@ -3,6 +3,85 @@
 ---------------------
 
 local vars = require("modules.variables")
+local utils = require("modules.utils")
+
+-- Switch workspaces with mainMod + [0-9]
+-- Move active window to a workspace with mainMod + SHIFT + [0-9]
+for i = 1, 10 do
+   local key = i % 10 -- 10 maps to key 0
+   hl.bind(vars.mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
+   hl.bind(vars.mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+end
+
+-- AZERTY workspace bindings
+for i, key in ipairs(vars.azerty) do
+   hl.bind(vars.mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i }))
+   hl.bind(vars.mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+end
+
+-- Status bar bindings
+for key, cmd in pairs(vars.sb[vars.statusBar]) do
+   hl.bind(key, hl.dsp.exec_cmd(cmd))
+end
+
+-- Toggling between scrolling/dwindle
+hl.bind(vars.mainMod .. " + TAB", function()
+           -- Get the current layout
+           local layout = hl.get_config("general.layout")
+           
+           if layout == "scrolling" then
+              hl.config({
+                    general = { layout = "dwindle" }
+              })
+           else
+              hl.config({
+                    general = { layout = "scrolling" }
+              })
+           end
+
+           -- Display the current layout
+           utils.layoutSwitchNotify()
+end)
+
+-- Cycle layouts forward
+hl.bind("MOD5 + TAB", function()
+           -- get the current layout
+           local layout = hl.get_config("general.layout")
+
+           if layout ~= vars.layoutTable[vars.index] then
+              hl.config({
+                    general = { layout = vars.layoutTable[vars.index] }
+              })
+           end
+
+           vars.index = vars.index + 1
+           if vars.index > #vars.layoutTable then
+              vars.index = 1
+           end
+           
+           -- display the current layout
+           utils.layoutSwitchNotify()
+end)
+
+-- Cycle layouts backward
+hl.bind("MOD5 + SHIFT + TAB", function()
+           -- get the current layout
+           local layout = hl.get_config("general.layout")
+
+           if layout ~= vars.layoutTable[vars.index] then
+              hl.config({
+                    general = { layout = vars.layoutTable[vars.index] }
+              })
+           end
+
+           vars.index = vars.index - 1
+           if vars.index < 1 then
+              vars.index = #vars.layoutTable
+           end
+           
+           -- display the current layout
+           utils.layoutSwitchNotify()
+end)
 
 hl.bind(vars.mainMod .. " + RETURN", hl.dsp.exec_cmd(vars.terminal))
 hl.bind(vars.mainMod .. " + Q", hl.dsp.window.close())
@@ -15,54 +94,101 @@ hl.bind(vars.mainMod .. " + PRINT", hl.dsp.exec_cmd("hyprshot -m window"))
 hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot -m region"))
 
 -- Move focus with mainMod + HJKL keys
--- hl.bind(vars.mainMod .. " + H",  hl.dsp.focus({ direction = "left" }))
--- hl.bind(vars.mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
+hl.bind(vars.mainMod .. " + H",  function()
+           local layoutTable = {
+              master = hl.dsp.layout("cycleprev"),
+              scrolling = hl.dsp.layout("focus left"),
+              monocle = hl.dsp.layout("cycleprev"),
+           }
+
+           -- use the same dispatcher for these layouts
+           local sharedLayouts = { "dwindle" }
+           local sharedDispatcher = hl.dsp.focus({ direction = "left" })
+           
+           utils.action(layoutTable, sharedLayouts, sharedDispatcher)
+end)
+
+hl.bind(vars.mainMod .. " + L", function()
+           local layoutTable = {
+              master = hl.dsp.layout("cyclenext"),
+              scrolling = hl.dsp.layout("focus right"),
+              monocle = hl.dsp.layout("cyclenext"),
+           }
+
+           -- use the same dispatcher for these layouts
+           local sharedLayouts = { "dwindle" }
+           local sharedDispatcher = hl.dsp.focus({ direction = "right" })
+           
+           utils.action(layoutTable, sharedLayouts, sharedDispatcher)
+end)
+
 hl.bind(vars.mainMod .. " + K",    hl.dsp.focus({ direction = "up" }))
 hl.bind(vars.mainMod .. " + J",  hl.dsp.focus({ direction = "down" }))
 
 -- Move window with mainMod + SHIFT + HJKL keys
--- hl.bind(vars.mainMod .. " + SHIFT + H",  hl.dsp.window.move({ direction = "left" }))
--- hl.bind(vars.mainMod .. " + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
+hl.bind(vars.mainMod .. " + SHIFT + H",  function()
+           local layoutTable = {
+              master = hl.dsp.layout("swapprev"),
+              scrolling = hl.dsp.layout("swapcol l"),
+           }
+
+           -- use the same dispatcher for these layouts
+           local sharedLayouts = { "dwindle" }
+           local sharedDispatcher = hl.dsp.window.move({ direction = "left" })
+           
+           utils.action(layoutTable, sharedLayouts, sharedDispatcher)
+end)
+
+hl.bind(vars.mainMod .. " + SHIFT + L", function()
+           local layoutTable = {
+              master = hl.dsp.layout("swapnext"),
+              scrolling = hl.dsp.layout("swapcol r"),
+           }
+
+           -- use the same dispatcher for these layouts
+           local sharedLayouts = { "dwindle" }
+           local sharedDispatcher = hl.dsp.window.move({ direction = "right" })
+           
+           utils.action(layoutTable, sharedLayouts, sharedDispatcher)
+end)
+
 hl.bind(vars.mainMod .. " + SHIFT + K",    hl.dsp.window.move({ direction = "up" }))
 hl.bind(vars.mainMod .. " + SHIFT + J",  hl.dsp.window.move({ direction = "down" }))
 
 -- Resize window
-hl.bind(vars.mainMod .. " + CTRL + LEFT",  hl.dsp.window.resize({ x = -30, y = 0, relative = true }))
-hl.bind(vars.mainMod .. " + CTRL + RIGHT",  hl.dsp.window.resize({ x = 30, y = 0, relative = true }))
-hl.bind(vars.mainMod .. " + CTRL + UP",  hl.dsp.window.resize({ x = 0, y = -30, relative = true }))
-hl.bind(vars.mainMod .. " + CTRL + DOWN",  hl.dsp.window.resize({ x = 0 , y = 30, relative = true }))
+hl.bind("SUPER + LEFT",  function()
+           local layoutTable = {
+              scrolling = hl.dsp.layout("colresize -0.1"),
+           }
+           
+           -- use the same dispatcher for these layouts
+           local sharedLayouts = { "dwindle", "master" }
+           local sharedDispatcher = hl.dsp.window.resize({ x = -100, y = 0, relative = true })
+           
+           utils.action(layoutTable, sharedLayouts, sharedDispatcher)
+end)
+
+hl.bind("SUPER + RIGHT",  function()
+           local layoutTable = {
+              scrolling = hl.dsp.layout("colresize +0.1"),
+           }
+           
+           -- use the same dispatcher for these layouts
+           local sharedLayouts = { "dwindle", "master" }
+           local sharedDispatcher = hl.dsp.window.resize({ x = 100, y = 0, relative = true })
+           
+           utils.action(layoutTable, sharedLayouts, sharedDispatcher)
+end)
+
+hl.bind("SUPER + UP",  hl.dsp.window.resize({ x = 0, y = -100, relative = true }))
+hl.bind("SUPER + DOWN",  hl.dsp.window.resize({ x = 0 , y = 100, relative = true }))
 hl.bind("MOD5 + O",  hl.dsp.window.cycle_next({ floating = true }))
 hl.bind("MOD5 + P",  hl.dsp.window.cycle_next({ tiled = true }))
 
--- Switch workspaces with mainMod + [0-9]
--- Move active window to a workspace with mainMod + SHIFT + [0-9]
-for i = 1, 10 do
-   local key = i % 10 -- 10 maps to key 0
-   hl.bind(vars.mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
-   hl.bind(vars.mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
-end
-
--- AZERTY workspace bindings
-local azerty = {"ampersand", "eacute", "quotedbl", "apostrophe", "parenleft", "minus", "egrave", "underscore", "ccedilla", "agrave"}
-for i, key in ipairs(azerty) do
-   hl.bind(vars.mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i }))
-   hl.bind(vars.mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
-end
-
 ------------------------ SCROLLING ONLY ------------------------
--- Focus column
-hl.bind(vars.mainMod .. " + H",  hl.dsp.layout("focus left"))
-hl.bind(vars.mainMod .. " + L", hl.dsp.layout("focus right"))
-
--- Swap column
-hl.bind(vars.mainMod .. " + SHIFT + H", hl.dsp.layout("swapcol l"))
-hl.bind(vars.mainMod .. " + SHIFT + L", hl.dsp.layout("swapcol r"))
-
 -- Resize column 
 hl.bind(vars.mainMod .. " + M", hl.dsp.layout("colresize +conf"))
 hl.bind(vars.mainMod .. " + SHIFT + M", hl.dsp.layout("colresize -conf"))
-hl.bind("SUPER + LEFT",  hl.dsp.layout("colresize -0.1"))
-hl.bind("SUPER + RIGHT",  hl.dsp.layout("colresize +0.1"))
 
 -- Consume or expel column
 hl.bind(vars.mainMod .. " + SHIFT + LEFT", hl.dsp.layout("consume_or_expel prev"))

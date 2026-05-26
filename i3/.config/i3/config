@@ -126,7 +126,7 @@ for_window [class="Fsearch"] floating enable, resize set 1359 889, move position
 # using assign
 #assign [class="Emacs"] 1
 assign [class="Brave-browser"] 2
-assign [class="^dolphin$"] $ws3
+assign [class="^dolphin$"] 3
 #assign [class="^libreoffice-*"] 10
 #assign [class="soffice"] 10
 
@@ -257,7 +257,7 @@ bindsym $mod+Shift+ampersand move container to workspace number $ws1
 bindsym $mod+Shift+eacute move container to workspace number $ws2
 bindsym $mod+Shift+quotedbl move container to workspace number $ws3
 bindsym $mod+Shift+apostrophe move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+parenleft move container to workspace number $ws5
 bindsym $mod+Shift+minus move container to workspace number $ws6
 bindsym $mod+Shift+egrave move container to workspace number $ws7
 bindsym $mod+Shift+underscore move container to workspace number $ws8
@@ -353,7 +353,7 @@ bar {
 
 # bindsym $mod+shift+x exec --no-startup-id betterlockscreen -l
 exec --no-startup-id feh --bg-scale --randomize ~/wallpapers/
-exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
 # exec_always --no-startup-id autotiling
 #exec_always --no-startup-id polybar
 # exec_always --no-startup-id ~/.config/polybar/launch.sh
