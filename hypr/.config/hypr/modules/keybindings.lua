@@ -20,15 +20,17 @@ for i, key in ipairs(vars.azerty) do
 end
 
 -- Status bar bindings
-for key, cmd in pairs(vars.sbBinds[vars.statusBar]) do
+for key, cmd in pairs(vars.sb[vars.sb.name].binds) do
    hl.bind(key, hl.dsp.exec_cmd(cmd))
 end
 
 -- Layout specific keybindings
 for key, _ in pairs(vars.allLayoutKeys) do
    hl.bind(key, function()
-              local layout = hl.get_config("general.layout")
-              local cmd = vars.layoutBinds[layout][key]
+              -- local layout = hl.get_config("general.layout")
+              local ws = hl.get_active_workspace() -- this is the best call regarding my current setup
+              local layout = ws.tiled_layout
+              local cmd = vars.layouts[layout].binds[key]
 
               if cmd then
                  hl.dispatch(cmd)
@@ -36,30 +38,79 @@ for key, _ in pairs(vars.allLayoutKeys) do
    end)
 end
 
--- Toggling between scrolling/dwindle
+-- Display current layout as a notification
+hl.bind("SUPER + L", function()
+           utils.layoutNotify()
+end)
+
+-- Cycle scrolling/hy3 layouts
 hl.bind(vars.mainMod .. " + TAB", function()
-           utils.toggleLayouts("scrolling", "dwindle")
+           utils.cycleLayouts({ general = false,
+                                forward = true,
+                                layouts = {
+                                   "scrolling",
+                                   "hy3",
+                                },
+           })
 end)
 
--- Cycle layouts forward
+-- Cycle workspace layouts forward
 hl.bind("MOD5 + TAB", function()
-           utils.cycleLayouts()
+           utils.cycleLayouts({ general = false,
+                                forward = true,
+                                layouts = vars.layoutNames,
+           })
 end)
 
--- Cycle layouts backward
+-- Cycle workspace layouts backward
 hl.bind("MOD5 + SHIFT + TAB", function()
-           utils.cycleLayouts(-1)
+           utils.cycleLayouts({ general = false,
+                                forward = false,
+                                layouts = vars.layoutNames,
+           })
 end)
 
+--[[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+   These bindings are useless in workspaces using
+   workspace rules because they require removing
+   these rules first and we don't have that feature yet.
+   I hope I get a good answer to this problem here:
+   https://github.com/hyprwm/Hyprland/discussions/14852
+   Edit: workspace rules removal will be implemented in v0.56.0, Thanks Vaxry.
+   https://github.com/hyprwm/Hyprland/issues/14876
+   
+-- Cycle general layouts forward
+hl.bind("SUPER + TAB", function()
+           utils.cycleLayouts({ general = true,
+                                forward = true,
+                                layouts = vars.layoutNames,
+                                
+           })
+end)
+
+-- Cycle general layouts backward
+hl.bind("SUPER + SHIFT + TAB", function()
+           utils.cycleLayouts({ general = true,
+                                forward = false,
+                                layouts = vars.layoutNames,
+                                
+           })
+   end)
+--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@]]
+
+-- General keybindings that work for every layout.
 hl.bind(vars.mainMod .. " + RETURN", hl.dsp.exec_cmd(vars.terminal))
 hl.bind(vars.mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(vars.mainMod .. " + SPACE", hl.dsp.exec_cmd(vars.menu))
 hl.bind(vars.mainMod .. " + T", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(vars.mainMod .. " + ESCAPE", hl.dsp.window.fullscreen({mode = "fullscreen", action = "toggle"}))
 hl.bind(vars.mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"))
-hl.bind("PRINT", hl.dsp.exec_cmd("flameshot gui"))
 hl.bind(vars.mainMod .. " + PRINT", hl.dsp.exec_cmd("hyprshot -m window"))
+hl.bind("PRINT", hl.dsp.exec_cmd("flameshot gui"))
 hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot -m region"))
+
+-- Be careful with this one as it doesn't ask and I might unintentionally press it.
+hl.bind("CTRL + ALT + DELETE", hl.dsp.exec_cmd("hyprshutdown -t 'Shutting down...' --post-cmd 'shutdown -P 0'"))
 
 hl.bind(vars.mainMod .. " + K",    hl.dsp.focus({ direction = "up" }))
 hl.bind(vars.mainMod .. " + J",  hl.dsp.focus({ direction = "down" }))
