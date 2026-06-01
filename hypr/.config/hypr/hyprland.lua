@@ -2,8 +2,8 @@
 --- MAIN HYPRLAND CONFIGURATION ---
 -----------------------------------
 require("modules.permissions")
+require("modules.events")
 require("modules.monitors")
-require("modules.autostart")
 require("modules.environment")
 require("modules.look-n-feel")
 require("modules.misc")

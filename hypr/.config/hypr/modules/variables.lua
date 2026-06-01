@@ -75,55 +75,108 @@ M.sb = {
    },
 }
 
+-- Current layout
+-- This will be updated whenever "monitor.layout_changed" event happens.
+M.currentLayout = hl.get_config("general.layout")
+
 -- Layouts table
 M.layouts = {
    dwindle   = {
       color = "rgb(bd93f9)",
       binds = {
-         [ M.mainMod .. " + H"]         = hl.dsp.focus({ direction = "left" }),
-         [ M.mainMod .. " + L"]         = hl.dsp.focus({ direction = "right" }),
-         [ M.mainMod .. " + SHIFT + H"] = hl.dsp.window.move({ direction = "left" }),
-         [ M.mainMod .. " + SHIFT + L"] = hl.dsp.window.move({ direction = "right" }),
-         ["SUPER + LEFT"]               = hl.dsp.window.resize({ x = -100, y = 0, relative = true }),
-         ["SUPER + RIGHT"]              = hl.dsp.window.resize({ x = 100, y = 0, relative = true }),
+         normal = {
+            [ M.mainMod .. " + H"]         = hl.dsp.focus({ direction = "left" }),
+            [ M.mainMod .. " + L"]         = hl.dsp.focus({ direction = "right" }),
+            [ M.mainMod .. " + SHIFT + H"] = hl.dsp.window.move({ direction = "left" }),
+            [ M.mainMod .. " + SHIFT + L"] = hl.dsp.window.move({ direction = "right" }),
+            ["SUPER + LEFT"]               = hl.dsp.window.resize({ x = -100, y = 0, relative = true }),
+            ["SUPER + RIGHT"]              = hl.dsp.window.resize({ x = 100, y = 0, relative = true }),
+         },
+
+         submaps = {
+            resize = {
+               ["LEFT"]  = hl.dsp.window.resize({ x = -100, y = 0, relative = true }),
+               ["RIGHT"] = hl.dsp.window.resize({ x = 100, y = 0, relative = true }),
+               ["UP"]    = hl.dsp.window.resize({ x = 0, y = -100, relative = true }),
+               ["DOWN"]  = hl.dsp.window.resize({ x = 0, y = 100, relative = true }),
+               ["H"]     = hl.dsp.window.resize({ x = -100, y = 0, relative = true }),
+               ["L"]     = hl.dsp.window.resize({ x = 100, y = 0, relative = true }),
+               ["K"]     = hl.dsp.window.resize({ x = 0, y = -100, relative = true }),
+               ["J"]     = hl.dsp.window.resize({ x = 0, y = 100, relative = true }),
+            },
+         },
       },
    },
    master    = {
       color = "rgb(ffb86c)",
       binds = {
-         [ M.mainMod .. " + H"]         = hl.dsp.layout("cycleprev"),
-         [ M.mainMod .. " + L"]         = hl.dsp.layout("cyclenext"),
-         [ M.mainMod .. " + SHIFT + H"] = hl.dsp.layout("swapprev"),
-         [ M.mainMod .. " + SHIFT + L"] = hl.dsp.layout("swapnext"),
-         ["SUPER + LEFT"]               = hl.dsp.window.resize({ x = -100, y = 0, relative = true }),
-         ["SUPER + RIGHT"]              = hl.dsp.window.resize({ x = 100, y = 0, relative = true }),
+         normal = {
+            [ M.mainMod .. " + H"]         = hl.dsp.layout("cycleprev"),
+            [ M.mainMod .. " + L"]         = hl.dsp.layout("cyclenext"),
+            [ M.mainMod .. " + SHIFT + H"] = hl.dsp.layout("swapprev"),
+            [ M.mainMod .. " + SHIFT + L"] = hl.dsp.layout("swapnext"),
+            ["SUPER + LEFT"]               = hl.dsp.window.resize({ x = -100, y = 0, relative = true }),
+            ["SUPER + RIGHT"]              = hl.dsp.window.resize({ x = 100, y = 0, relative = true }),
+         },
+
+         submaps = {
+            resize = {
+               ["LEFT"]  = hl.dsp.window.resize({ x = -100, y = 0, relative = true }),
+               ["RIGHT"] = hl.dsp.window.resize({ x = 100, y = 0, relative = true }),
+               ["UP"]    = hl.dsp.window.resize({ x = 0, y = -100, relative = true }),
+               ["DOWN"]  = hl.dsp.window.resize({ x = 0, y = 100, relative = true }),
+               ["H"]     = hl.dsp.window.resize({ x = -100, y = 0, relative = true }),
+               ["L"]     = hl.dsp.window.resize({ x = 100, y = 0, relative = true }),
+               ["K"]     = hl.dsp.window.resize({ x = 0, y = -100, relative = true }),
+               ["J"]     = hl.dsp.window.resize({ x = 0, y = 100, relative = true }),
+            },
+         },
       },
    },
    scrolling = {
       color = "rgb(00ffd5)",
       binds = {
-         [ M.mainMod .. " + H"]             = hl.dsp.layout("focus left"),
-         [ M.mainMod .. " + L"]             = hl.dsp.layout("focus right"),
-         [ M.mainMod .. " + SHIFT + H"]     = hl.dsp.layout("swapcol l"),
-         [ M.mainMod .. " + SHIFT + L"]     = hl.dsp.layout("swapcol r"),
-         ["SUPER + LEFT"]                   = hl.dsp.layout("colresize -0.1"),
-         ["SUPER + RIGHT"]                  = hl.dsp.layout("colresize +0.1"),
-         [ M.mainMod .. " + M"]             = hl.dsp.layout("colresize +conf"),
-         [ M.mainMod .. " + SHIFT + M"]     = hl.dsp.layout("colresize -conf"),
-         [ M.mainMod .. " + SHIFT + LEFT"]  = hl.dsp.layout("consume_or_expel prev"),
-         [ M.mainMod .. " + SHIFT + RIGHT"] = hl.dsp.layout("consume_or_expel next"),
-         [ M.mainMod .. " + SHIFT + F"]     = hl.dsp.layout("fit active"),
-         [ M.mainMod .. " + CTRL + F"]      = hl.dsp.layout("fit visible"),
-         [ M.mainMod .. " + LEFT"]          = hl.dsp.layout("move -col"),
-         [ M.mainMod .. " + RIGHT"]         = hl.dsp.layout("move +col"),
+         normal = {
+            [ M.mainMod .. " + H"]             = hl.dsp.layout("focus left"),
+            [ M.mainMod .. " + L"]             = hl.dsp.layout("focus right"),
+            [ M.mainMod .. " + SHIFT + H"]     = hl.dsp.layout("swapcol l"),
+            [ M.mainMod .. " + SHIFT + L"]     = hl.dsp.layout("swapcol r"),
+            ["SUPER + LEFT"]                   = hl.dsp.layout("colresize -0.1"),
+            ["SUPER + RIGHT"]                  = hl.dsp.layout("colresize +0.1"),
+            [ M.mainMod .. " + M"]             = hl.dsp.layout("colresize +conf"),
+            [ M.mainMod .. " + SHIFT + M"]     = hl.dsp.layout("colresize -conf"),
+            [ M.mainMod .. " + SHIFT + LEFT"]  = hl.dsp.layout("consume_or_expel prev"),
+            [ M.mainMod .. " + SHIFT + RIGHT"] = hl.dsp.layout("consume_or_expel next"),
+            [ M.mainMod .. " + SHIFT + F"]     = hl.dsp.layout("fit active"),
+            [ M.mainMod .. " + CTRL + F"]      = hl.dsp.layout("fit visible"),
+            [ M.mainMod .. " + LEFT"]          = hl.dsp.layout("move -col"),
+            [ M.mainMod .. " + RIGHT"]         = hl.dsp.layout("move +col"),
+         },
+
+         submaps = {
+            resize = {
+               ["LEFT"]  = hl.dsp.layout("colresize -0.1"),
+               ["RIGHT"] = hl.dsp.layout("colresize +0.1"),
+               ["UP"]    = hl.dsp.window.resize({ x = 0, y = -100, relative = true }),
+               ["DOWN"]  = hl.dsp.window.resize({ x = 0, y = 100, relative = true }),
+               ["H"]     = hl.dsp.layout("colresize -0.1"),
+               ["L"]     = hl.dsp.layout("colresize +0.1"),
+               ["K"]     = hl.dsp.window.resize({ x = 0, y = -100, relative = true }),
+               ["J"]     = hl.dsp.window.resize({ x = 0, y = 100, relative = true }),
+            },
+         },
       },
       
    },
    monocle = {
       color   = "rgb(ff79c6)",
       binds = {
-         [ M.mainMod .. " + H"] = hl.dsp.layout("cycleprev"),
-         [ M.mainMod .. " + L"] = hl.dsp.layout("cyclenext"),
+         normal = {
+            [ M.mainMod .. " + H"] = hl.dsp.layout("cycleprev"),
+            [ M.mainMod .. " + L"] = hl.dsp.layout("cyclenext"),
+         },
+
+         submaps = {},
       },
    },
 }
@@ -136,18 +189,33 @@ if hl.plugin.hy3 ~= nil then
    M.layouts["hy3"] = {
       color = "rgb(8be9fd)",
       binds = {
-         [ M.mainMod .. " + RIGHT"]     = hy3.make_group("h"),
-         [ M.mainMod .. " + DOWN"]      = hy3.make_group("v"),
-         [ M.mainMod .. " + Z"]         = hy3.change_group("toggletab"),
-         [ M.mainMod .. " + H"]         = hy3.move_focus("left"),
-         [ M.mainMod .. " + L"]         = hy3.move_focus("right"),
-         [ M.mainMod .. " + J"]         = hy3.move_focus("down"),
-         [ M.mainMod .. " + K"]         = hy3.move_focus("up"),
-         [ M.mainMod .. " + SHIFT + H"] = hy3.move_window("left"),
-         [ M.mainMod .. " + SHIFT + L"] = hy3.move_window("right"),
-         [ M.mainMod .. " + SHIFT + J"] = hy3.move_window("down"),
-         [ M.mainMod .. " + SHIFT + K"] = hy3.move_window("up"),
-         ["MOD5 + F"]                   = hy3.toggle_focus_layer(),
+         normal = {
+            [ M.mainMod .. " + RIGHT"]     = hy3.make_group("h"),
+            [ M.mainMod .. " + DOWN"]      = hy3.make_group("v"),
+            [ M.mainMod .. " + Z"]         = hy3.change_group("toggletab"),
+            [ M.mainMod .. " + H"]         = hy3.move_focus("left"),
+            [ M.mainMod .. " + L"]         = hy3.move_focus("right"),
+            [ M.mainMod .. " + J"]         = hy3.move_focus("down"),
+            [ M.mainMod .. " + K"]         = hy3.move_focus("up"),
+            [ M.mainMod .. " + SHIFT + H"] = hy3.move_window("left"),
+            [ M.mainMod .. " + SHIFT + L"] = hy3.move_window("right"),
+            [ M.mainMod .. " + SHIFT + J"] = hy3.move_window("down"),
+            [ M.mainMod .. " + SHIFT + K"] = hy3.move_window("up"),
+            ["MOD5 + F"]                   = hy3.toggle_focus_layer(),
+         },
+
+         submaps = {
+            resize = {
+               ["LEFT"]  = hl.dsp.window.resize({ x = -100, y = 0, relative = true }),
+               ["RIGHT"] = hl.dsp.window.resize({ x = 100, y = 0, relative = true }),
+               ["UP"]    = hl.dsp.window.resize({ x = 0, y = -100, relative = true }),
+               ["DOWN"]  = hl.dsp.window.resize({ x = 0, y = 100, relative = true }),
+               ["H"]     = hl.dsp.window.resize({ x = -100, y = 0, relative = true }),
+               ["L"]     = hl.dsp.window.resize({ x = 100, y = 0, relative = true }),
+               ["K"]     = hl.dsp.window.resize({ x = 0, y = -100, relative = true }),
+               ["J"]     = hl.dsp.window.resize({ x = 0, y = 100, relative = true }),
+            },
+         },
       },
    }
 
@@ -156,11 +224,11 @@ if hl.plugin.hy3 ~= nil then
    -- So why am I still putting this here?? xD
    -- for i = 1, 10 do
    --    local key = i % 10
-   --    M.layouts.hy3.binds[ M.mainMod .. " + SHIFT + " .. key ] = hy3.move_to_workspace(i)
+   --    M.layouts.hy3.binds.normal[ M.mainMod .. " + SHIFT + " .. key ] = hy3.move_to_workspace(i)
    -- end
    -- -- azerty workspace bindings support
    -- for i, key in ipairs(M.azerty) do
-   --    M.layouts.hy3.binds[ M.mainMod .. " + SHIFT + " .. key ] = hy3.move_to_workspace(i)
+   --    M.layouts.hy3.binds.normal[ M.mainMod .. " + SHIFT + " .. key ] = hy3.move_to_workspace(i)
    -- end
 end
 
@@ -168,13 +236,20 @@ end
 M.layoutNames  = { "dwindle", "master", "scrolling", "monocle", "hy3"}
 M.index        = 1
 
--- A helper table to easily call hl.bind()
--- before getting the current layout.
+-- helper tables for getting all normal and submaps keybindings.
 M.allLayoutKeys = {}
+M.allLayoutSubmapKeys = {}
 
 for layout, _ in pairs(M.layouts) do
-   for key, _ in pairs(M.layouts[layout].binds) do
+   -- Get all normal keys.
+   for key, _ in pairs(M.layouts[layout].binds.normal) do
       M.allLayoutKeys[key] = true   -- This could be anything except nil
+   end
+   -- Get all submaps keys.
+   for submap, _ in pairs(M.layouts[layout].binds.submaps) do
+      for key, _ in pairs(M.layouts[layout].binds.submaps[submap]) do
+         M.allLayoutSubmapKeys[key] = true 
+      end
    end
 end
 

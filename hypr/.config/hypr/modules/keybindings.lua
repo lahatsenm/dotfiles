@@ -24,13 +24,10 @@ for key, cmd in pairs(vars.sb[vars.sb.name].binds) do
    hl.bind(key, hl.dsp.exec_cmd(cmd))
 end
 
--- Layout specific keybindings
+-- Layout specific bindings
 for key, _ in pairs(vars.allLayoutKeys) do
    hl.bind(key, function()
-              -- local layout = hl.get_config("general.layout")
-              local ws = hl.get_active_workspace() -- this is the best call regarding my current setup
-              local layout = ws.tiled_layout
-              local cmd = vars.layouts[layout].binds[key]
+              local cmd = vars.layouts[vars.currentLayout].binds.normal[key]
 
               if cmd then
                  hl.dispatch(cmd)
@@ -79,24 +76,47 @@ end)
    Edit: workspace rules removal will be implemented in v0.56.0, Thanks Vaxry.
    https://github.com/hyprwm/Hyprland/issues/14876
    
--- Cycle general layouts forward
-hl.bind("SUPER + TAB", function()
-           utils.cycleLayouts({ general = true,
-                                forward = true,
-                                layouts = vars.layoutNames,
-                                
-           })
-end)
-
--- Cycle general layouts backward
-hl.bind("SUPER + SHIFT + TAB", function()
-           utils.cycleLayouts({ general = true,
-                                forward = false,
-                                layouts = vars.layoutNames,
-                                
-           })
+   -- Cycle general layouts forward
+   hl.bind("SUPER + TAB", function()
+   utils.cycleLayouts({ general = true,
+   forward = true,
+   layouts = vars.layoutNames,
+   
+   })
    end)
---@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@]]
+
+   -- Cycle general layouts backward
+   hl.bind("SUPER + SHIFT + TAB", function()
+   utils.cycleLayouts({ general = true,
+   forward = false,
+   layouts = vars.layoutNames,
+   
+   })
+   end)
+   --@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@]]
+
+-- Submaps bindings
+hl.bind("ALT + R",  hl.dsp.submap("resize"))
+
+-- "resize" submap
+hl.define_submap("resize", function()
+                    for key, _ in pairs(vars.allLayoutSubmapKeys) do
+                       hl.bind(key, function()
+                                  local cmd = vars.layouts
+                                     and vars.layouts[vars.currentLayout]
+                                     and vars.layouts[vars.currentLayout].binds
+                                     and vars.layouts[vars.currentLayout].binds.submaps
+                                     and vars.layouts[vars.currentLayout].binds.submaps["resize"]
+                                     and vars.layouts[vars.currentLayout].binds.submaps["resize"][key]
+                                  
+                                  if cmd then
+                                     hl.dispatch(cmd)
+                                  end
+                       end)
+                    end
+                    
+                    hl.bind("catchall", hl.dsp.submap("reset"))
+end)
 
 -- General keybindings that work for every layout.
 hl.bind(vars.mainMod .. " + RETURN", hl.dsp.exec_cmd(vars.terminal))

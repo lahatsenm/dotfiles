@@ -15,13 +15,11 @@ function M.action(layouts, sharedLayouts, sharedDispatcher)
          layouts[layout] = sharedDispatcher
       end
       -- else -- for debugging purposes only
-      --    local cmd = string.format("hyprctl notify -1 2500 'rgb(00ffd5)' 'NO NO NO'")
-      --    hl.dispatch(hl.dsp.exec_cmd(cmd))
+      -- hl.notification.create({ text = "NO NO NO ", timeout = 2500, color = "rgb(00ffd5)" })
    end
    
    -- get current layout
-   -- local layout = hl.get_config("general.layout")
-   local layout = hl.get_active_workspace().tiled_layout -- again, this is the best call for my current setup
+   local layout = vars.currentLayout
 
    -- use appropriate dispatcher
    if layouts[layout] then
@@ -30,13 +28,10 @@ function M.action(layouts, sharedLayouts, sharedDispatcher)
 end
 
 -- Function that notifies about the current layout
-function M.layoutNotify(layout)
-   layout = layout or hl.get_active_workspace().tiled_layout
-   local color = vars.layouts[layout].color
-   local capitalized = layout:gsub("^%l", string.upper)
-   cmd = string.format("hyprctl notify -1 2500 '%s' 'Layout: %s'", color, capitalized)
-
-   hl.dispatch(hl.dsp.exec_cmd(cmd))
+function M.layoutNotify()
+   local color = vars.layouts[vars.currentLayout].color
+   local capitalized = vars.currentLayout:gsub("^%l", string.upper)
+   hl.notification.create({ text = "Layout: " .. capitalized, timeout = 2500, color = color })
 end
 
 -- Function to cycle layouts
@@ -48,10 +43,9 @@ function M.cycleLayouts(layoutInfo)
                                    "dwindle",
                                 },
                               }
-   local layout = nil
    local nextLayout = nil
    
-   -- direction: forward/backward
+   -- Direction: forward/backward
    if layoutInfo.forward then
       vars.index = vars.index + 1
       if vars.index > #layoutInfo.layouts then
@@ -68,26 +62,18 @@ function M.cycleLayouts(layoutInfo)
    nextLayout = layoutInfo.layouts[vars.index]
    
    if layoutInfo.general then
-      layout = hl.get_config("general.layout")
-      
-      if layout ~= nextLayout then
+      if vars.currentLayout ~= nextLayout then
          hl.config({
                general = { layout = nextLayout }
          })
       end
    else
       local ws = hl.get_active_workspace()
-      layout = ws.tiled_layout
       
-      if layout ~= nextLayout then
+      if vars.currentLayout ~= nextLayout then
          hl.workspace_rule({ workspace = ws.id, layout = nextLayout })
       end
    end
-
-   -- Update the current layout
-   layout = nextLayout
-   -- Display the current layout
-   M.layoutNotify(layout)
 end
 
 return M
