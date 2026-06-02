@@ -4,6 +4,7 @@
 
 local vars = require("modules.variables")
 local utils = require("modules.utils")
+require("modules.submaps")
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
@@ -20,7 +21,7 @@ for i, key in ipairs(vars.azerty) do
 end
 
 -- Status bar bindings
-for key, cmd in pairs(vars.sb[vars.sb.name].binds) do
+for key, cmd in pairs(vars.sb[vars.sb.name].binds.normal) do
    hl.bind(key, hl.dsp.exec_cmd(cmd))
 end
 
@@ -96,26 +97,22 @@ end)
    --@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@]]
 
 -- Submaps bindings
-hl.bind("ALT + R",  hl.dsp.submap("resize"))
+hl.bind("ALT + R",  hl.dsp.submap("main"))
+hl.define_submap("main", function()
+                    -- "resize"
+                    hl.bind("R", hl.dsp.submap("resize"))
 
--- "resize" submap
-hl.define_submap("resize", function()
-                    for key, _ in pairs(vars.allLayoutSubmapKeys) do
-                       hl.bind(key, function()
-                                  local cmd = vars.layouts
-                                     and vars.layouts[vars.currentLayout]
-                                     and vars.layouts[vars.currentLayout].binds
-                                     and vars.layouts[vars.currentLayout].binds.submaps
-                                     and vars.layouts[vars.currentLayout].binds.submaps["resize"]
-                                     and vars.layouts[vars.currentLayout].binds.submaps["resize"][key]
-                                  
-                                  if cmd then
-                                     hl.dispatch(cmd)
-                                  end
-                       end)
-                    end
+                    -- "layout"
+                    hl.bind("L", hl.dsp.submap("layout"))
+
+                    -- "sb" for status bar
+                    hl.bind("B", hl.dsp.submap("sb"))
                     
-                    hl.bind("catchall", hl.dsp.submap("reset"))
+                    -- "volume"
+                    hl.bind("V", hl.dsp.submap("volume"))
+
+                    -- "brightness"
+                    hl.bind("ALT + B", hl.dsp.submap("brightness"))
 end)
 
 -- General keybindings that work for every layout.
@@ -140,8 +137,8 @@ hl.bind(vars.mainMod .. " + SHIFT + J",  hl.dsp.window.move({ direction = "down"
 
 hl.bind("SUPER + UP",  hl.dsp.window.resize({ x = 0, y = -100, relative = true }))
 hl.bind("SUPER + DOWN",  hl.dsp.window.resize({ x = 0 , y = 100, relative = true }))
-hl.bind("MOD5 + O",  hl.dsp.window.cycle_next({ floating = true }))
-hl.bind("MOD5 + P",  hl.dsp.window.cycle_next({ tiled = true }))
+hl.bind("SUPER + PRIOR",  hl.dsp.window.cycle_next({ floating = true }))
+hl.bind("SUPER + NEXT",  hl.dsp.window.cycle_next({ tiled = true }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(vars.mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))

@@ -4,7 +4,7 @@ local M = {}
 
 -- Programs
 M.hyprpm      = "hyprpm reload -n"
-M.terminal    = "wezterm"
+M.terminal    = "wezterm start --always-new-process"
 M.editor      = "emacs"
 M.fileManager = "dolphin"
 M.browser     = "brave"
@@ -28,40 +28,63 @@ M.sb = {
    dms = {
       cmd = "dms run",
       binds = {
-         ["SUPER + S"]                  = "dms ipc call settings toggle",
-         [ M.mainMod .. " + F12"]       = "dms ipc call lock lock",
-         ["SUPER + I"]                  = "dms ipc call inhibit toggle",
-         ["SUPER + F9"]                 = "dms ipc call wallpaper next",
-         ["SUPER + SHIFT + F9"]         = "dms ipc call wallpaper prev",
-         ["SUPER + W"]                  = "dms ipc call dankdash wallpaper",
-         ["SUPER + N"]                  = "dms ipc call notifications toggle",
-         ["SUPER + O"]                  = "dms ipc call notepad toggle",
-         [ M.mainMod .. " + SHIFT + Q"] = "dms ipc call powermenu toggle",
+         normal = {
+            ["SUPER + S"]                  = "dms ipc call settings toggle",
+            [ M.mainMod .. " + F12"]       = "dms ipc call lock lock",
+            ["SUPER + I"]                  = "dms ipc call inhibit toggle",
+            ["SUPER + F9"]                 = "dms ipc call wallpaper next",
+            ["SUPER + SHIFT + F9"]         = "dms ipc call wallpaper prev",
+            ["SUPER + W"]                  = "dms ipc call dankdash wallpaper",
+            ["SUPER + N"]                  = "dms ipc call notifications toggle",
+            ["SUPER + O"]                  = "dms ipc call notepad toggle",
+            [ M.mainMod .. " + SHIFT + Q"] = "dms ipc call powermenu toggle",
+         },
+
+         submaps = {},
       },
    },
    
    noctalia = {
       cmd = "qs -c noctalia-shell --no-duplicate",
       binds = {
-         ["SUPER + S"]                  = "qs -c noctalia-shell ipc call settings toggle",
-         [ M.mainMod .. " + F12"]       = "qs -c noctalia-shell ipc call lockScreen lock",
-         ["SUPER + I"]                  = "qs -c noctalia-shell ipc call idleInhibitor toggle",
-         ["SUPER + W"]                  = "qs -c noctalia-shell ipc call wallpaper toggle",
-         ["SUPER + N"]                  = "qs -c noctalia-shell ipc call notifications toggleHistory",
-         [ M.mainMod .. " + SHIFT + Q"] = "qs -c noctalia-shell ipc call sessionMenu toggle",
+         normal = {
+            ["SUPER + S"]                  = "qs -c noctalia-shell ipc call settings toggle",
+            [ M.mainMod .. " + F12"]       = "qs -c noctalia-shell ipc call lockScreen lock",
+            ["SUPER + I"]                  = "qs -c noctalia-shell ipc call idleInhibitor toggle",
+            ["SUPER + W"]                  = "qs -c noctalia-shell ipc call wallpaper toggle",
+            ["SUPER + N"]                  = "qs -c noctalia-shell ipc call notifications toggleHistory",
+            [ M.mainMod .. " + SHIFT + Q"] = "qs -c noctalia-shell ipc call sessionMenu toggle",
+         },
+
+         submaps = {},
       },
    },
 
    noctaliaV5 = {
       cmd = "noctalia --daemon",
       binds = {
-         ["SUPER + S"]                  = "noctalia msg settings-toggle",
-         -- [ M.mainMod .. " + F12"]       = "noctalia msg screen-lock", -- I will be using this once v5 is stable
-         [ M.mainMod .. " + F12"]       = "hyprlock",
-         ["SUPER + I"]                  = "noctalia msg caffeine-toggle",
-         ["SUPER + W"]                  = "noctalia msg panel-toggle wallpaper",
-         ["PAUSE"]                      = "noctalia msg panel-toggle control-center",
-         [ M.mainMod .. " + SHIFT + Q"] = "noctalia msg panel-toggle session",
+         normal = {
+            ["SUPER + S"]                  = "noctalia msg settings-toggle",
+            -- [ M.mainMod .. " + F12"]       = "noctalia msg screen-lock", -- I will be using this once v5 is stable
+            [ M.mainMod .. " + F12"]       = "hyprlock",
+            ["SUPER + I"]                  = "noctalia msg caffeine-toggle",
+            ["SUPER + W"]                  = "noctalia msg panel-toggle wallpaper",
+            ["PAUSE"]                      = "noctalia msg panel-toggle control-center",
+            [ M.mainMod .. " + SHIFT + Q"] = "noctalia msg panel-toggle session",
+         },
+
+         submaps = {
+            ["S"] = "noctalia msg settings-toggle",
+            ["H"] = "noctalia msg bar-toggle",
+            ["I"] = "noctalia msg caffeine-toggle",
+            ["W"] = "noctalia msg panel-toggle wallpaper",
+            ["C"] = "noctalia msg panel-toggle control-center",
+            ["N"] = "noctalia msg panel-toggle control-center notifications",
+            ["D"] = "noctalia msg panel-toggle control-center calendar",
+            ["A"] = "noctalia msg panel-toggle control-center audio",
+            ["Q"] = "noctalia msg panel-toggle session",
+            ["F12"] = "hyprlock",
+         },
       },
    },
 
@@ -69,15 +92,20 @@ M.sb = {
       daemon = "wayle panel start",
       cmd =  "wayle shell",
       binds = {
-         ["SUPER + S"] = "wayle panel settings",
-         ["SUPER + I"] = "wayle idle toggle",
+         normal = {
+            ["SUPER + S"] = "wayle panel settings",
+            ["SUPER + I"] = "wayle idle toggle",
+         },
+
+         submaps = {},
       },
    },
 }
 
--- Current layout
--- This will be updated whenever "monitor.layout_changed" event happens.
-M.currentLayout = hl.get_config("general.layout")
+-- Keep track of the current layout and workspace
+-- These will be updated whenever "monitor.layout_changed" event happens.
+M.ws = { id = 1, tiled_layout = "scrolling" } -- need to give it default values to prevent errors at startup.
+M.currentLayout = M.ws.tiled_layout
 
 -- Layouts table
 M.layouts = {
@@ -236,7 +264,7 @@ end
 M.layoutNames  = { "dwindle", "master", "scrolling", "monocle", "hy3"}
 M.index        = 1
 
--- helper tables for getting all normal and submaps keybindings.
+-- helper tables for getting all layout normal and submaps keybindings.
 M.allLayoutKeys = {}
 M.allLayoutSubmapKeys = {}
 
