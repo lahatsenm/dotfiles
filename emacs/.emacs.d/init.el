@@ -97,9 +97,9 @@
 ;;(require 'smex)
 ;;(smex-initialize)
 
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+(keymap-global-set "M-x" 'smex)
+(keymap-global-set "M-X" 'smex-major-mode-commands)
+(keymap-global-set "C-c C-c M-x" 'execute-extended-command)
 
 (defun rc/duplicate-line ()
   "Duplicate current line"
@@ -142,41 +142,49 @@
 (yas-global-mode 1)
 
 ;; KEYBINDINGS
-(global-set-key (kbd "C-,") 'rc/duplicate-line)
-(global-set-key (kbd "M-n") 'scroll-up-line)
-(global-set-key (kbd "M-p") 'scroll-down-line)
-(global-set-key (kbd "M-P") 'beginning-of-buffer)
-(global-set-key (kbd "M-N") 'end-of-buffer)
-(global-set-key (kbd "C-;") 'ido-select-window)
-(global-set-key (kbd "M-O") 'resize-window)
-(global-set-key (kbd "M-o") 'occur)
-(global-set-key (kbd "M-I") 'imenu)
-(global-set-key (kbd "C-:") 'rgrep)
+(keymap-global-set "C-," 'rc/duplicate-line)
+(keymap-global-set "M-n" 'scroll-up-line)
+(keymap-global-set "M-p" 'scroll-down-line)
+(keymap-global-set "C-;" 'ido-select-window)
+(keymap-global-set "M-I" 'imenu)
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
-(global-set-key (kbd "C-!") 'avy-goto-line)
-(global-set-key (kbd "M-<up>") 'move-text-up)
-(global-set-key (kbd "M-<down>") 'move-text-down)
+(keymap-global-set "C-:" 'avy-goto-line)
+(keymap-global-set "M-S-<up>" 'move-text-up)
+(keymap-global-set "M-S-<down>" 'move-text-down)
 
 ;; sudo-edit
 (require 'sudo-edit)
-(global-set-key (kbd "C-c C-r") 'sudo-edit)
+(keymap-global-set "C-c C-r" 'sudo-edit)
 
 ;; expand-region
 (require 'expand-region)
-(global-set-key (kbd "C-=") 'er/expand-region)
-(global-set-key (kbd "C-)") 'er/contract-region)
+(keymap-global-set "C-=" 'er/expand-region)
+(keymap-global-set "C-)" 'er/contract-region)
 
 ;; multiple-cursors
 (require 'multiple-cursors)
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C-<tab>") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<iso-lefttab>") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<tab>") 'mc/mark-all-like-this)
+(keymap-global-set "C-S-c C-S-c" 'mc/edit-lines)
+(keymap-global-set "C-<tab>" 'mc/mark-next-like-this)
+(keymap-global-set "C-<iso-lefttab>" 'mc/mark-previous-like-this)
+(keymap-global-set "C-c C-<tab>" 'mc/mark-all-like-this)
 
 ;; AUCTeX
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq-default TeX-master nil)
+
+;; visual-replace
+(require 'visual-replace)
+(visual-replace-global-mode 1)
+(keymap-global-set "M-ù" 'visual-replace)
+
+;; Unbind "C-z" which is suspend-frame
+(keymap-global-unset "C-z")
+
+;; zoxide
+(require 'zoxide)
+(keymap-global-set "C-z C-f" 'zoxide-find-file)
+(keymap-global-set "C-z C-d" 'zoxide-travel)
 
 ;; beacon
 ;;(beacon-mode 1)

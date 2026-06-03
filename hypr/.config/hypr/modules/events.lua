@@ -10,8 +10,8 @@ hl.on("hyprland.start", function()
          -- Initialize variables
          vars.ws = hl.get_active_workspace()
          vars.currentLayout = vars.ws.tiled_layout
-         -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
          -- Autostart necessary processes (like notifications daemons, status bars, etc.)
+         -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
          -- I have to use table.pack() here to handle nil values.
          local programs = table.pack(
             vars.hyprpm,
@@ -40,12 +40,12 @@ hl.on("monitor.layout_changed", function()
          --     utils.layoutNotify()
          -- will give two notifications and that is not what I want. So,
          -- I need to make sure that it will notify me only when the
-         -- layout has changed and that needs a comparison:
+         -- layout has changed. Here is how to do that:
          -- First, we get the new workspace and layout
          vars.ws = hl.get_active_workspace()
          local newLayout = vars.ws.tiled_layout
          -- Next we compare the current layout to the new one
-         -- and notify me only if they are different.
+         -- and notify only if they are different.
          -- This ensures that we get exactly one notification.
          if vars.currentLayout ~= newLayout then
             -- Update the current layout.

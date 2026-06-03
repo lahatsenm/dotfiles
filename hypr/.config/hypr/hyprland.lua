@@ -12,4 +12,3 @@ require("modules.keybindings")
 require("modules.rules")
 require("modules.plugins.dynamic-cursors").setup()
 require("modules.plugins.hy3").setup()
-

@@ -103,8 +103,8 @@ M.sb = {
 }
 
 -- Keep track of the current layout and workspace
--- These will be updated whenever "monitor.layout_changed" event happens.
-M.ws = { id = 1, tiled_layout = "scrolling" } -- need to give it default values to prevent errors at startup.
+-- These will be updated whenever some events happen.
+M.ws = { id = 1, tiled_layout = "scrolling" } -- need to give these default values to prevent errors at startup.
 M.currentLayout = M.ws.tiled_layout
 
 -- Layouts table
