@@ -87,3 +87,4 @@ hypr/.config/hypr/scheme/
 wezterm/.config/wezterm/colors/
 emacs/.emacs.d/themes/
 nvim/.config/nvim/lua/plugins/
+emacs/.emacs.d/bookmarks

@@ -144,10 +144,6 @@ hl.bind("SUPER + NEXT",  hl.dsp.window.cycle_next({ tiled = true }))
 hl.bind(vars.mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(vars.mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 
--- Same things as above but only with keyboard
-hl.bind(vars.mainMod .. " + PRIOR", hl.dsp.focus({ workspace = "e-1" }))
-hl.bind(vars.mainMod .. " + NEXT",  hl.dsp.focus({ workspace = "e+1" }))
-
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(vars.mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(vars.mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
