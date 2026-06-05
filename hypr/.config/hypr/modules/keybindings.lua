@@ -36,11 +36,6 @@ for key, _ in pairs(vars.allLayoutKeys) do
    end)
 end
 
--- Display current layout as a notification.
-hl.bind("SUPER + L", function()
-           utils.layoutNotify()
-end)
-
 -- Submaps bindings.
 hl.bind("ALT + R",  hl.dsp.submap("main"))
 hl.define_submap("main", function()

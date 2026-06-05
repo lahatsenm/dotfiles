@@ -47,6 +47,11 @@ hl.define_submap("layout", function()
                        hl.bind("H", function() hl.workspace_rule({ workspace = vars.ws.id, layout = "hy3" }) end)
                     end
 
+                    -- Display current layout as a notification.
+                    hl.bind("N", function()
+                               utils.layoutNotify()
+                    end)
+                    
                     -- Cycle scrolling/hy3 layouts.
                     hl.bind("Z", function()
                                utils.cycleLayouts({ general = false,

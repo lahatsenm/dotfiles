@@ -10,21 +10,7 @@ keybinds clear-defaults=true {
         bind "Alt 7" { GoToTab 7; SwitchToMode "normal"; }
         bind "Alt 8" { GoToTab 8; SwitchToMode "normal"; }
         bind "Alt 9" { GoToTab 9; SwitchToMode "normal"; }
-
-        bind "Ctrl h" { MoveFocus "left"; SwitchToMode "normal"; }
-        bind "Ctrl j" { MoveFocus "down"; SwitchToMode "normal"; }
-        bind "Ctrl k" { MoveFocus "up"; SwitchToMode "normal"; }
-        bind "Ctrl l" { MoveFocus "right"; SwitchToMode "normal"; }
         
-        bind "Alt e" {
-            LaunchOrFocusPlugin "session-manager" {
-                floating true
-                move_to_focused_tab true
-            }
-            SwitchToMode "normal"
-        }
-        
-        bind "Ctrl u" { SwitchToMode "move"; }
         bind "Ctrl space" { SwitchToMode "locked"; }
     }
     locked {
@@ -78,7 +64,7 @@ keybinds clear-defaults=true {
         bind "r" { SwitchToMode "renametab"; TabNameInput 0; }
         bind "s" { ToggleActiveSyncTab; SwitchToMode "normal"; }
         bind "Ctrl t" { SwitchToMode "normal"; }
-        bind "u" { CloseTab; SwitchToMode "normal"; }
+        bind "x" { CloseTab; SwitchToMode "normal"; }
         bind "tab" { ToggleTab; }
         bind "space" { SwitchToMode "normal"; }
     }
@@ -107,7 +93,7 @@ keybinds clear-defaults=true {
         bind "up" { MovePane "up"; }
         bind "right" { MovePane "right"; }
         bind "h" { MovePane "left"; }
-        bind "Ctrl u" { SwitchToMode "normal"; }
+        bind "Ctrl h" { SwitchToMode "normal"; }
         bind "j" { MovePane "down"; }
         bind "k" { MovePane "up"; }
         bind "l" { MovePane "right"; }
@@ -211,7 +197,7 @@ keybinds clear-defaults=true {
         bind "Ctrl q" { Quit; }
     }
     shared_except "locked" "move" {
-        bind "Ctrl u" { SwitchToMode "move"; }
+        bind "Ctrl h" { SwitchToMode "move"; }
     }
     shared_except "locked" "session" {
         bind "Ctrl o" { SwitchToMode "session"; }
@@ -238,7 +224,7 @@ keybinds clear-defaults=true {
         bind "esc" { SwitchToMode "normal"; }
     }
     shared_among "pane" "tmux" {
-        bind "u" { CloseFocus; SwitchToMode "normal"; }
+        bind "x" { CloseFocus; SwitchToMode "normal"; }
     }
     shared_among "scroll" "search" {
         bind "PageDown" { PageScrollDown; }
