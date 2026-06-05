@@ -47,7 +47,18 @@ hl.define_submap("layout", function()
                        hl.bind("H", function() hl.workspace_rule({ workspace = vars.ws.id, layout = "hy3" }) end)
                     end
 
-                    -- Cycling layouts forward/backward
+                    -- Cycle scrolling/hy3 layouts.
+                    hl.bind("Z", function()
+                               utils.cycleLayouts({ general = false,
+                                                    forward = true,
+                                                    layouts = {
+                                                       "scrolling",
+                                                       "hy3",
+                                                    },
+                               })
+                    end)
+                    
+                    -- Cycling layouts forward/backward.
                     hl.bind("K", function()
                                utils.cycleLayouts({ general = false,
                                                     forward = true,
@@ -60,6 +71,33 @@ hl.define_submap("layout", function()
                                                     layouts = vars.layoutNames,
                                })
                     end)
+
+                    --[[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                       These bindings below are useless in workspaces using
+                       workspace rules because they require removing
+                       these rules first and we don't have that feature yet.
+                       I hope I get a good answer to this problem here:
+                       https://github.com/hyprwm/Hyprland/discussions/14852
+                       Edit: workspace rules removal will be implemented in v0.56.0, Thanks Vaxry.
+                       https://github.com/hyprwm/Hyprland/issues/14876
+                       
+                       -- Cycle general layouts forward/backward.
+                       hl.bind("SHIFT + K", function()
+                       utils.cycleLayouts({ general = true,
+                       forward = true,
+                       layouts = vars.layoutNames,
+                       
+                       })
+                       end)
+
+                       hl.bind("SHIFT + J", function()
+                       utils.cycleLayouts({ general = true,
+                       forward = false,
+                       layouts = vars.layoutNames,
+                       
+                       })
+                       end)
+                       --@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@]]
                     
                     hl.bind("catchall", hl.dsp.submap("reset"))
 end)
@@ -70,19 +108,21 @@ hl.define_submap("sb", function()
                        and vars.sb[vars.sb.name]
                        and vars.sb[vars.sb.name].binds
                        and vars.sb[vars.sb.name].binds.submaps
-                    
-                    for key, cmd in pairs(submaps) do
-                       hl.bind(key, function()
-                                  if cmd then
-                                     local t = type(cmd)
-                                     
-                                     if t == "string" then
-                                        hl.dispatch(hl.dsp.exec_cmd(cmd))
-                                     else
-                                        hl.dispatch(cmd)
+
+                    if submaps then
+                       for key, cmd in pairs(submaps) do
+                          hl.bind(key, function()
+                                     if cmd then
+                                        local t = type(cmd)
+                                        
+                                        if t == "string" then
+                                           hl.dispatch(hl.dsp.exec_cmd(cmd))
+                                        else
+                                           hl.dispatch(cmd)
+                                        end
                                      end
-                                  end
-                       end)
+                          end)
+                       end
                     end
                     
                     hl.bind("catchall", hl.dsp.submap("reset"))
@@ -90,12 +130,12 @@ end)
 
 -- "volume"
 hl.define_submap("volume", function()
-                     hl.bind("K", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 3%+"), { locked = true, repeating = true })
-                     hl.bind("J", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%-"),      { locked = true, repeating = true })
-                     hl.bind("L", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 3%+"), { locked = true, repeating = true })
-                     hl.bind("H", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%-"),      { locked = true, repeating = true })
-                     hl.bind("M", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
-                     hl.bind("SHIFT + M", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
+                    hl.bind("K", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 3%+"), { locked = true, repeating = true })
+                    hl.bind("J", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%-"),      { locked = true, repeating = true })
+                    hl.bind("L", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 3%+"), { locked = true, repeating = true })
+                    hl.bind("H", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%-"),      { locked = true, repeating = true })
+                    hl.bind("M", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
+                    hl.bind("SHIFT + M", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
 
                     hl.bind("catchall", hl.dsp.submap("reset"))
 end)

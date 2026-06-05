@@ -65,7 +65,7 @@ M.sb = {
       binds = {
          normal = {
             ["SUPER + S"]                  = "noctalia msg settings-toggle",
-            -- [ M.mainMod .. " + F12"]       = "noctalia msg screen-lock", -- I will be using this once v5 is stable
+            -- [ M.mainMod .. " + F12"]       = "noctalia msg screen-lock", -- I will be using this once v5 is stable.
             [ M.mainMod .. " + F12"]       = "hyprlock",
             ["SUPER + I"]                  = "noctalia msg caffeine-toggle",
             ["SUPER + W"]                  = "noctalia msg panel-toggle wallpaper",
@@ -102,7 +102,7 @@ M.sb = {
    },
 }
 
--- Keep track of the current layout and workspace
+-- Keep track of the current layout and workspace.
 -- These will be updated whenever some events happen.
 M.ws = { id = 1, tiled_layout = "scrolling" } -- need to give these default values to prevent errors at startup.
 M.currentLayout = M.ws.tiled_layout
@@ -213,7 +213,7 @@ M.layouts = {
 if hl.plugin.hy3 ~= nil then
    local hy3 = hl.plugin.hy3
 
-   -- Fill the layouts table
+   -- Fill the layouts table.
    M.layouts["hy3"] = {
       color = "rgb(8be9fd)",
       binds = {
@@ -271,7 +271,7 @@ M.allLayoutSubmapKeys = {}
 for layout, _ in pairs(M.layouts) do
    -- Get all normal keys.
    for key, _ in pairs(M.layouts[layout].binds.normal) do
-      M.allLayoutKeys[key] = true   -- This could be anything except nil
+      M.allLayoutKeys[key] = true   -- This could be anything except nil.
    end
    -- Get all submaps keys.
    for submap, _ in pairs(M.layouts[layout].binds.submaps) do
