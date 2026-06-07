@@ -117,8 +117,6 @@ M.layouts = {
             [ M.mainMod .. " + L"]         = hl.dsp.focus({ direction = "right" }),
             [ M.mainMod .. " + SHIFT + H"] = hl.dsp.window.move({ direction = "left" }),
             [ M.mainMod .. " + SHIFT + L"] = hl.dsp.window.move({ direction = "right" }),
-            ["SUPER + LEFT"]               = hl.dsp.window.resize({ x = -100, y = 0, relative = true }),
-            ["SUPER + RIGHT"]              = hl.dsp.window.resize({ x = 100, y = 0, relative = true }),
          },
 
          submaps = {
@@ -143,8 +141,6 @@ M.layouts = {
             [ M.mainMod .. " + L"]         = hl.dsp.layout("cyclenext"),
             [ M.mainMod .. " + SHIFT + H"] = hl.dsp.layout("swapprev"),
             [ M.mainMod .. " + SHIFT + L"] = hl.dsp.layout("swapnext"),
-            ["SUPER + LEFT"]               = hl.dsp.window.resize({ x = -100, y = 0, relative = true }),
-            ["SUPER + RIGHT"]              = hl.dsp.window.resize({ x = 100, y = 0, relative = true }),
          },
 
          submaps = {
@@ -169,8 +165,6 @@ M.layouts = {
             [ M.mainMod .. " + L"]             = hl.dsp.layout("focus right"),
             [ M.mainMod .. " + SHIFT + H"]     = hl.dsp.layout("swapcol l"),
             [ M.mainMod .. " + SHIFT + L"]     = hl.dsp.layout("swapcol r"),
-            ["SUPER + LEFT"]                   = hl.dsp.layout("colresize -0.1"),
-            ["SUPER + RIGHT"]                  = hl.dsp.layout("colresize +0.1"),
             [ M.mainMod .. " + M"]             = hl.dsp.layout("colresize +conf"),
             [ M.mainMod .. " + SHIFT + M"]     = hl.dsp.layout("colresize -conf"),
             [ M.mainMod .. " + SHIFT + LEFT"]  = hl.dsp.layout("consume_or_expel prev"),

@@ -75,8 +75,6 @@ hl.bind(vars.mainMod .. " + J",  hl.dsp.focus({ direction = "down" }))
 hl.bind(vars.mainMod .. " + SHIFT + K",    hl.dsp.window.move({ direction = "up" }))
 hl.bind(vars.mainMod .. " + SHIFT + J",  hl.dsp.window.move({ direction = "down" }))
 
-hl.bind("SUPER + UP",  hl.dsp.window.resize({ x = 0, y = -100, relative = true }))
-hl.bind("SUPER + DOWN",  hl.dsp.window.resize({ x = 0 , y = 100, relative = true }))
 hl.bind("SUPER + PRIOR",  hl.dsp.window.cycle_next({ floating = true }))
 hl.bind("SUPER + NEXT",  hl.dsp.window.cycle_next({ tiled = true }))
 
