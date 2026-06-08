@@ -23,7 +23,7 @@ M.azerty = {"ampersand", "eacute", "quotedbl", "apostrophe", "parenleft", "minus
 -- Status bar table
 M.sb = {
    -- Preferred status bar
-   name = "noctaliaV5",
+   name = "noctalia",
    
    dms = {
       cmd = "dms run",
@@ -43,24 +43,8 @@ M.sb = {
          submaps = {},
       },
    },
-   
+
    noctalia = {
-      cmd = "qs -c noctalia-shell --no-duplicate",
-      binds = {
-         normal = {
-            ["SUPER + S"]                  = "qs -c noctalia-shell ipc call settings toggle",
-            [ M.mainMod .. " + F12"]       = "qs -c noctalia-shell ipc call lockScreen lock",
-            ["SUPER + I"]                  = "qs -c noctalia-shell ipc call idleInhibitor toggle",
-            ["SUPER + W"]                  = "qs -c noctalia-shell ipc call wallpaper toggle",
-            ["SUPER + N"]                  = "qs -c noctalia-shell ipc call notifications toggleHistory",
-            [ M.mainMod .. " + SHIFT + Q"] = "qs -c noctalia-shell ipc call sessionMenu toggle",
-         },
-
-         submaps = {},
-      },
-   },
-
-   noctaliaV5 = {
       cmd = "noctalia --daemon",
       binds = {
          normal = {
