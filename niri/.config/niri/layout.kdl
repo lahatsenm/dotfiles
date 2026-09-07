@@ -56,7 +56,7 @@ layout {
         on
 
         // How many logical pixels the ring extends out from the windows.
-        width 5
+        width 2
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -68,12 +68,12 @@ layout {
         //active-color "#EB9CAE"
         //active-color "#F88379" // Coral Pink
         //active-color "#E30B5C" // Raspberry
-        active-color "#F33A6A" // Rose
+        //active-color "#F33A6A" // Rose
         //active-color "#F44C78" // Bright Rose
         //active-color "#F55F86" // Brighter Rose
 
         //active-gradient from="#2aa198" to="#268bd2" angle=45
-        //active-gradient from="#33ccff" to="#00ff99" angle=45 // hyprland's default border color
+        active-gradient from="#33ccff" to="#00ff99" angle=45 // hyprland's default border color
 
         // Color of the ring on inactive monitors.
         //
@@ -103,8 +103,9 @@ layout {
         // The settings are the same as for the focus ring.
         // If you enable the border, you probably want to disable the focus ring.
         off
-        width 1
-        
+        width 2
+
+        //active-gradient from="#33ccff" to="#00ff99" angle=45 // hyprland's default border color
         active-gradient from="#2aa198" to="#268bd2" angle=45
         inactive-color "#505050"
 

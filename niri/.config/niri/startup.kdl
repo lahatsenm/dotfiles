@@ -6,7 +6,8 @@
 // This line starts waybar, a commonly used bar for Wayland compositors.
 //spawn-sh-at-startup "waybar --config ~/.config/waybar/niri/config --style ~/.config/waybar/niri/style.css"
 //spawn-sh-at-startup "qs -c noctalia-shell --no-duplicate"
-spawn-sh-at-startup "dms run"
+//spawn-sh-at-startup "dms run"
+spawn-sh-at-startup "noctalia --daemon"
 spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 //spawn-sh-at-startup "swww-daemon"
 spawn-sh-at-startup "swayidle" 
@@ -19,7 +20,7 @@ spawn-sh-at-startup "swayidle"
 //spawn-at-startup "hypridle"
 
 spawn-at-startup "vicinae" "server"
-spawn-sh-at-startup "~/own/default-terminal"
+spawn-sh-at-startup "wezterm"
 spawn-sh-at-startup "emacs"
 //spawn-sh-at-startup "zen-browser"
 //spawn-sh-at-startup "thorium-browser"
