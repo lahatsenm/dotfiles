@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; Custom settings
 
 (custom-set-variables
@@ -19,7 +20,7 @@
          ido-select-window ido-yes-or-no kanagawa-themes kdl-mode
          lsp-mode lua-mode luarocks move-text multiple-cursors
          nord-theme nordic-night-theme nordless-theme numeri pdf-tools
-         resize-window rust-mode smex solarized-gruvbox-theme
+         qml-mode resize-window rust-mode smex solarized-gruvbox-theme
          solarized-theme spatial-window sudo-edit tree-sitter
          typing-game typst-ts-mode visual-replace yaml-mode yasnippet
          zig-mode zoxide))

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")
@@ -5,8 +6,8 @@
 
 ;; Fix emacs window issue in niri
 ;; https://github.com/niri-wm/niri/issues/2632
-(setopt frame-inhibit-implied-resize t)
-(setopt frame-resize-pixelwise t)
+;; (setopt frame-inhibit-implied-resize t)
+;; (setopt frame-resize-pixelwise t)
 
 (package-initialize)
 
@@ -51,6 +52,7 @@
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode 1)
 (global-auto-revert-mode 1)
+(setq auto-revert-verbose nil)
 ;;(blink-cursor-mode -1)
 (desktop-save-mode 1)
 (recentf-mode 1)
@@ -63,7 +65,7 @@
 
 ;; Font configuration
 (add-to-list 'default-frame-alist '(font . "TX-02-XlabMono-14.3"))
-(set-face-attribute 'default nil :font "TX-02-XlabMono" :height 143)
+;;(set-face-attribute 'default nil :font "TX-02-XlabMono" :height 143)
 ;;(set-face-attribute 'default nil :font "JetBrainsMono" :height 143)
 ;;(set-face-attribute 'default nil :font "CascadiaCode" :height 143)
 ;;(set-face-attribute 'default nil :font "BerkeleyMono" :height 143)
@@ -72,9 +74,9 @@
 ;;(set-face-attribute 'default nil :font "comicMono" :height 143)
 
 ;; Fallback fonts
-(set-fontset-font t 'unicode "Noto Sans Symbols2" nil 'append)
-(set-fontset-font t 'unicode "Noto Sans CJK KR" nil 'append)
-(set-fontset-font t 'unicode "FontAwesome" nil 'append)
+;; (set-fontset-font t 'unicode "Noto Sans Symbols2" nil 'append)
+;; (set-fontset-font t 'unicode "Noto Sans CJK KR" nil 'append)
+;; (set-fontset-font t 'unicode "FontAwesome" nil 'append)
 
 ;;(set-face-attribute 'default nil :font "Comic Code" :height 135 :foreground "#E0E0E0") ;; this is a very beautiful font as well
 ;;(setq-default line-spacing 0.2) ;; this is better in terms of visual
@@ -88,7 +90,8 @@
 (customize-set-variable
  'display-buffer-alist
  '(("\\*Compilation\\*"
-    (display-buffer-below-selected)
+    (display-buffer-reuse-window
+    display-buffer-below-selected)
     (window-height . 0.30))))
 
 ;; I think we don't need this anymore since we are using
