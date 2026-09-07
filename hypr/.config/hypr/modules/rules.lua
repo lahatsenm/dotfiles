@@ -5,6 +5,25 @@
 -- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/
 -- and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 
+local vitriol = { "V", "I", "T", "R", "I", "O", "L" }
+
+for i = 1, 7 do
+  hl.workspace_rule({
+    workspace    = tostring(i),
+    default_name = vitriol[i],
+    persistent   = true,
+  })
+end
+
+local acs = { "A", "C", "S" }
+
+for i = 8, 10 do
+  hl.workspace_rule({
+    workspace    = tostring(i),
+    default_name = acs[i - 7],
+  })
+end
+
 -- Window rules that are useful
 local suppressMaximizeRule = hl.window_rule({
     -- Ignore maximize requests from all apps.

@@ -2,27 +2,22 @@
 ----- EVENTS -----
 ------------------
 
-local vars = require("modules.variables")
-local utils = require("modules.utils")
+local p = require("modules.programs")
+local u = require("modules.utils")
 
--- Things to do when hyprland starts.
 hl.on("hyprland.start", function()
-         -- Initialize variables
-         vars.ws = hl.get_active_workspace()
-         vars.currentLayout = vars.ws.tiled_layout
          -- Autostart necessary processes (like notifications daemons, status bars, etc.)
          -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
          -- I have to use table.pack() here to handle nil values.
          local programs = table.pack(
-            vars.hyprpm,
-            vars.sb[vars.sb.name].daemon,
-            vars.sb[vars.sb.name].cmd,
-            vars.menuDaemon,
-            vars.polkit,
-            vars.screenShot,
-            vars.idleDaemon,
-            vars.editor,
-            vars.browser
+            p.hyprpm,
+            p.statusBar,
+            p.menuDaemon,
+            p.polkit,
+            p.screenShot,
+            p.idleDaemon,
+            p.editor,
+            p.browser
          )
          -- Run programs one by one.
          for i = 1, programs.n do
@@ -32,31 +27,16 @@ hl.on("hyprland.start", function()
          end
 end)
 
--- Things to do when monitor arrangements changes (like config, layout, workspace rules, monitor resolution, ...)
-hl.on("monitor.layout_changed", function()
-         -- It looks like this event is called multiple times
-         -- because something like this:
-         --     vars.currentLayout = hl.get_active_workspace().tiled_layout
-         --     utils.layoutNotify()
-         -- will give two notifications and that is not what I want. So,
-         -- I need to make sure that it will notify me only when the
-         -- layout has changed. Here is how to do that:
-         -- First, we get the new workspace and layout
-         vars.ws = hl.get_active_workspace()
-         local newLayout = vars.ws.tiled_layout
-         -- Next we compare the current layout to the new one
-         -- and notify only if they are different.
-         -- This ensures that we get exactly one notification.
-         if vars.currentLayout ~= newLayout then
-            -- Update the current layout.
-            vars.currentLayout = newLayout
-            utils.layoutNotify()
-         end
+hl.on("keybinds.submap", function(submap)
+         u.processSubmap(submap)
 end)
 
--- Things to do when active workspace changes.
-hl.on("workspace.active", function(ws)
-         vars.ws = ws
-         vars.currentLayout = ws.tiled_layout
-         -- hl.notification.create({ text = string.format("Workspace: %d and Layout: %s", vars.ws.id, vars.currentLayout), timeout = 2500 })
+hl.on("config.reloaded", function()
+         -- Reset submap when config reloads.
+         -- It looks like calling hl.dispatch(hl.dsp.submap("reset")) directly
+         -- makes Hyprland crash at startup. So, it is necessary to
+         -- only reset a submap when there is exactly one active.
+         if hl.get_current_submap() ~= "" then
+            hl.dispatch(hl.dsp.submap("reset"))
+         end
 end)
