@@ -25,60 +25,53 @@ config.audible_bell = "Disabled"
 -- config.color_scheme = "Batman"
 -- config.color_scheme = "GruvboxDark"
 -- config.color_scheme = 'nord'
-config.color_scheme = 'Solarized (dark) (terminal.sexy)'
+-- config.color_scheme = 'Solarized (dark) (terminal.sexy)'
 -- config.color_scheme = 'Digerati (terminal.sexy)'
 -- config.color_scheme = 'Kanagawa Dragon (Gogh)'
 
 -- Set tab_bar colors to solarized theme
-config.colors = {
-   cursor_bg = "#93a1a1",    
-   cursor_border = "#93a1a1",
+-- config.colors = {
+--    cursor_bg = "#93a1a1",    
+--    cursor_border = "#93a1a1",
   
-   tab_bar = {
-      -- Active tab colors
-      active_tab = {
-         bg_color = "#002b36", 
-         fg_color = "#839496", 
-         intensity = "Bold",
-      },
+--    tab_bar = {
+--       -- Active tab colors
+--       active_tab = {
+--          bg_color = "#002b36", 
+--          fg_color = "#839496", 
+--          intensity = "Bold",
+--       },
 
-      -- Inactive tab colors
-      inactive_tab = {
-         bg_color = "#073642", 
-         fg_color = "#586e75", 
-      },
+--       -- Inactive tab colors
+--       inactive_tab = {
+--          bg_color = "#073642", 
+--          fg_color = "#586e75", 
+--       },
 
-      -- Inactive tab when hovered
-      inactive_tab_hover = {
-         bg_color = "#586e75", 
-         fg_color = "#93a1a1", 
-         italic = true,
-      },
+--       -- Inactive tab when hovered
+--       inactive_tab_hover = {
+--          bg_color = "#586e75", 
+--          fg_color = "#93a1a1", 
+--          italic = true,
+--       },
 
-      -- New tab button colors
-      new_tab = {
-         bg_color = "#073642", 
-         fg_color = "#586e75", 
-      },
+--       -- New tab button colors
+--       new_tab = {
+--          bg_color = "#073642", 
+--          fg_color = "#586e75", 
+--       },
 
-      -- Hover on new tab button
-      new_tab_hover = {
-         bg_color = "#586e75", 
-         fg_color = "#93a1a1", 
-         italic = true,
-      },
+--       -- Hover on new tab button
+--       new_tab_hover = {
+--          bg_color = "#586e75", 
+--          fg_color = "#93a1a1", 
+--          italic = true,
+--       },
 
-      -- Tab bar background behind tabs
-      background = "#002b36", 
-   },
-}
-
--- -- Set background to the same color as neovim, as well
--- -- config.colors.background = "#111111"
--- config.colors.background = "#282828"
--- -- config.colors.background = "#1d2021"
-
---- config.window_background_opacity = 1.0
+--       -- Tab bar background behind tabs
+--       background = "#002b36", 
+--    },
+-- }
 
 config.font = wezterm.font_with_fallback({
       {
@@ -86,6 +79,7 @@ config.font = wezterm.font_with_fallback({
          harfbuzz_features = { "ss02" },
       },
 
+      "Iosevka",
       "Cascadia Code",
       "Noto Sans Symbols2",      -- good fallback for misc symbols
       "Noto Sans CJK KR",        -- covers Korean/circled glyphs
