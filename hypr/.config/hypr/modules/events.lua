@@ -14,9 +14,10 @@ hl.on("hyprland.start", function()
             p.statusBar,
             p.menuDaemon,
             p.polkit,
-            p.screenShot,
             p.idleDaemon,
+            p.screenShot,
             p.editor,
+            p.terminal,
             p.browser
          )
          -- Run programs one by one.

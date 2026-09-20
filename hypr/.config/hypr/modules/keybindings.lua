@@ -23,352 +23,202 @@ for i, key in ipairs(azerty) do
 end
 
 -- Layout specific bindings.
-hl.bind(mainMod .. "+ H", function()
-           local currentLayout = hl.get_active_workspace().tiled_layout
+local function layoutBind(bindTable)
+   return function()
+      local workspace = hl.get_active_special_workspace() or hl.get_active_workspace()
 
-           if currentLayout == "scrolling" then
-              hl.dispatch(hl.dsp.layout("focus left"))
-           elseif currentLayout == "dwindle" then
-              hl.dispatch(hl.dsp.focus({ direction = "left" }))
-           elseif currentLayout == "master" or currentLayout == "monocle" then
-              hl.dispatch(hl.dsp.layout("cycleprev"))
-           end
-end)
+      if not workspace then
+         return
+      end
 
-hl.bind(mainMod .. "+ L", function()
-           local currentLayout = hl.get_active_workspace().tiled_layout
+      local layout = workspace.tiled_layout
+      local action = bindTable[layout]
+      
+      if action then
+         if type(action) == "function" then
+            action()
+         else
+            hl.dispatch(action)
+         end
+      end
+   end
+end
 
-           if currentLayout == "scrolling" then
-              hl.dispatch(hl.dsp.layout("focus right"))
-           elseif currentLayout == "dwindle" then
-              hl.dispatch(hl.dsp.focus({ direction = "right" }))
-           elseif currentLayout == "master" or currentLayout == "monocle" then
-              hl.dispatch(hl.dsp.layout("cyclenext"))
-           end
-end)
-
-hl.bind(mainMod .. " + K",    function()
-           local currentLayout = hl.get_active_workspace().tiled_layout
-           if currentLayout == "scrolling" then
-              hl.dispatch(hl.dsp.layout("focus up"))
-           elseif currentLayout == "dwindle" then
-              hl.dispatch(hl.dsp.focus({ direction = "up" }))
-           end
-end)
-hl.bind(mainMod .. " + J",  function()
-           local currentLayout = hl.get_active_workspace().tiled_layout
-           if currentLayout == "scrolling" then
-              hl.dispatch(hl.dsp.layout("focus down"))
-           elseif currentLayout == "dwindle" then
-              hl.dispatch(hl.dsp.focus({ direction = "down" }))
-           end
-end)
-
-hl.bind(mainMod .. "+ SHIFT + H", function()
-           local currentLayout = hl.get_active_workspace().tiled_layout
-
-           if currentLayout == "scrolling" then
-              hl.dispatch(hl.dsp.layout("swapcol l"))
-           elseif currentLayout == "dwindle" then
-              hl.dispatch(hl.dsp.window.move({ direction = "left"}))
-           elseif currentLayout == "master" then
-              hl.dispatch(hl.dsp.layout("swapprev"))
-           end
-end)
-
-hl.bind(mainMod .. "+ SHIFT + L", function()
-           local currentLayout = hl.get_active_workspace().tiled_layout
-
-           if currentLayout == "scrolling" then
-              hl.dispatch(hl.dsp.layout("swapcol r"))
-           elseif currentLayout == "dwindle" then
-              hl.dispatch(hl.dsp.window.move({ direction = "right"}))
-           elseif currentLayout == "master" then
-              hl.dispatch(hl.dsp.layout("swapnext"))
-           end
-end)
-
-hl.bind(mainMod .. " + SHIFT + K", function()
-           local currentLayout = hl.get_active_workspace().tiled_layout
-           
-           if currentLayout == "scrolling" or currentLayout == "dwindle"  then
-              hl.dispatch(hl.dsp.window.move({ direction = "up" }))
-           end
-end)
-hl.bind(mainMod .. " + SHIFT + J", function()
-           local currentLayout = hl.get_active_workspace().tiled_layout
-           
-           if currentLayout == "scrolling" or currentLayout == "dwindle" then
-              hl.dispatch(hl.dsp.window.move({ direction = "down" }))
-           end
-end)
-
-hl.bind("MOD5 + TAB", function()
-           local currentLayout = hl.get_active_workspace().tiled_layout
-
-           if currentLayout == "scrolling" then
-              hl.dispatch(hl.dsp.layout("center"))
-           end
-end)
-
-hl.bind(mainMod .. "+ M", function()
-           local currentLayout = hl.get_active_workspace().tiled_layout
-
-           if currentLayout == "scrolling" then
-              hl.dispatch(hl.dsp.layout("colresize +conf"))
-           end
-end)
-
-hl.bind(mainMod .. "+ SHIFT + M", function()
-           local currentLayout = hl.get_active_workspace().tiled_layout
-
-           if currentLayout == "scrolling" then
-              hl.dispatch(hl.dsp.layout("colresize -conf"))
-           end
-end)
-
-hl.bind(mainMod .. "+ SHIFT + LEFT", function()
-           local currentLayout = hl.get_active_workspace().tiled_layout
-
-           if currentLayout == "scrolling" then
-              hl.dispatch(hl.dsp.layout("consume_or_expel prev"))
-           end
-end)
-
-hl.bind(mainMod .. "+ SHIFT + RIGHT", function()
-           local currentLayout = hl.get_active_workspace().tiled_layout
-
-           if currentLayout == "scrolling" then
-              hl.dispatch(hl.dsp.layout("consume_or_expel next"))
-           end
-end)
-
-hl.bind(mainMod .. "+ SHIFT + F", function()
-           local currentLayout = hl.get_active_workspace().tiled_layout
-
-           if currentLayout == "scrolling" then
-              hl.dispatch(hl.dsp.layout("fit active"))
-           end
-end)
-
-hl.bind(mainMod .. "+ CTRL + F", function()
-           local currentLayout = hl.get_active_workspace().tiled_layout
-
-           if currentLayout == "scrolling" then
-              hl.dispatch(hl.dsp.layout("fit visible"))
-           end
-end)
+hl.bind(mainMod .. "+ H", layoutBind({
+              scrolling = hl.dsp.layout("focus left"),
+              dwindle   = hl.dsp.focus({ direction = "left" }),
+              master    = hl.dsp.layout("cycleprev"),
+              monocle   = hl.dsp.layout("cycleprev"),
+}))
+hl.bind(mainMod .. "+ L", layoutBind({
+              scrolling = hl.dsp.layout("focus right"),
+              dwindle   = hl.dsp.focus({ direction = "right" }),
+              master    = hl.dsp.layout("cyclenext"),
+              monocle   = hl.dsp.layout("cyclenext")
+}))
+hl.bind(mainMod .. "+ K", layoutBind({
+              scrolling = hl.dsp.layout("focus up"),
+              dwindle   = hl.dsp.focus({ direction = "up" })
+}))
+hl.bind(mainMod .. "+ J", layoutBind({
+              scrolling = hl.dsp.layout("focus down"),
+              dwindle   = hl.dsp.focus({ direction = "down" })
+}))
+hl.bind(mainMod .. "+ SHIFT + H", layoutBind({
+              scrolling = hl.dsp.layout("swapcol l"),
+              dwindle = hl.dsp.window.move({ direction = "left" }),
+              master = hl.dsp.layout("swapprev")
+}))
+hl.bind(mainMod .. "+ SHIFT + L", layoutBind({
+              scrolling = hl.dsp.layout("swapcol r"),
+              dwindle = hl.dsp.window.move({ direction = "right" }),
+              master = hl.dsp.layout("swapnext")
+}))
+hl.bind(mainMod .. " + SHIFT + K", layoutBind({
+              scrolling = hl.dsp.window.move({ direction = "up" }),
+              dwindle = hl.dsp.window.move({ direction = "up" })
+}))
+hl.bind(mainMod .. " + SHIFT + J", layoutBind({
+              scrolling = hl.dsp.window.move({ direction = "down" }),
+              dwindle = hl.dsp.window.move({ direction = "down" })
+}))
+hl.bind("MOD5 + TAB", layoutBind({
+              scrolling = hl.dsp.layout("center")
+}))
+hl.bind(mainMod .. "+ M", layoutBind({
+              scrolling = hl.dsp.layout("colresize +conf")
+}))
+hl.bind(mainMod .. "+ SHIFT + M", layoutBind({
+              scrolling = hl.dsp.layout("colresize -conf")
+}))
+hl.bind(mainMod .. "+ SHIFT + LEFT", layoutBind({
+              scrolling = hl.dsp.layout("consume_or_expel prev")
+}))
+hl.bind(mainMod .. "+ SHIFT + RIGHT", layoutBind({
+              scrolling = hl.dsp.layout("consume_or_expel next")
+}))
+hl.bind(mainMod .. "+ SHIFT + F", layoutBind({
+              scrolling = hl.dsp.layout("fit active")
+}))
+hl.bind(mainMod .. "+ CTRL + F", layoutBind({
+              scrolling = hl.dsp.layout("fit visible")
+}))
 
 -- SUBMAPS
 hl.define_submap("resize", function()
-                    hl.bind("LEFT", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               if currentLayout == "scrolling" then
-                                  hl.dispatch(hl.dsp.layout("colresize -0.1"))
-                               elseif currentLayout == "dwindle" or currentLayout == "master" then
-                                  hl.dispatch(hl.dsp.window.resize({ x = -100, y = 0, relative = true }))
-                               end
-                    end, { repeating = true, })
+                    hl.bind("LEFT", layoutBind({
+                                  scrolling = hl.dsp.layout("colresize -0.1"),
+                                  dwindle = hl.dsp.window.resize({ x = -100, y = 0, relative = true }),
+                                  master = hl.dsp.window.resize({ x = -100, y = 0, relative = true })
+                                              }), { repeating = true, })
                     
-                    hl.bind("RIGHT", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               if currentLayout == "scrolling" then
-                                  hl.dispatch(hl.dsp.layout("colresize +0.1"))
-                               elseif currentLayout == "dwindle" or currentLayout == "master" then                             
-                                  hl.dispatch(hl.dsp.window.resize({ x = 100, y = 0, relative = true }))
-                               end
-                    end, { repeating = true, })
-                    
-                    hl.bind("UP", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               if currentLayout == "dwindle" or currentLayout == "master" then
-                                  hl.dispatch(hl.dsp.window.resize({ x = 0, y = -100, relative = true }))
-                               end
-                    end, { repeating = true, })
-                    
-                    hl.bind("DOWN", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               if currentLayout == "dwindle" or currentLayout == "master" then                             
-                                  hl.dispatch(hl.dsp.window.resize({ x = 0, y = 100, relative = true }))
-                               end
-                    end, { repeating = true, })
+                    hl.bind("RIGHT", layoutBind({
+                                  scrolling = hl.dsp.layout("colresize +0.1"),
+                                  dwindle = hl.dsp.window.resize({ x = 100, y = 0, relative = true }),
+                                  master = hl.dsp.window.resize({ x = 100, y = 0, relative = true })
+                                              }), { repeating = true, })
 
-                    hl.bind("H", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               if currentLayout == "scrolling" then
-                                  hl.dispatch(hl.dsp.layout("colresize -0.1"))
-                               elseif currentLayout == "dwindle" or currentLayout == "master" then
-                                  hl.dispatch(hl.dsp.window.resize({ x = -100, y = 0, relative = true }))
-                               end
-                    end, { repeating = true, })
+                    hl.bind("UP", layoutBind({
+                                  dwindle = hl.dsp.window.resize({ x = 0, y = -100, relative = true }),
+                                  master = hl.dsp.window.resize({ x = 0, y = -100, relative = true })
+                                            }), { repeating = true, })
+
+                    hl.bind("DOWN", layoutBind({
+                                  dwindle = hl.dsp.window.resize({ x = 0, y = 100, relative = true }),
+                                  master = hl.dsp.window.resize({ x = 0, y = 100, relative = true })
+                                            }), { repeating = true, })
+
+                    hl.bind("H", layoutBind({
+                                  scrolling = hl.dsp.layout("colresize -0.1"),
+                                  dwindle = hl.dsp.window.resize({ x = -100, y = 0, relative = true }),
+                                  master = hl.dsp.window.resize({ x = -100, y = 0, relative = true })
+                                           }), { repeating = true, })
                     
-                    hl.bind("L", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               if currentLayout == "scrolling" then
-                                  hl.dispatch(hl.dsp.layout("colresize +0.1"))
-                               elseif currentLayout == "dwindle" or currentLayout == "master" then                             
-                                  hl.dispatch(hl.dsp.window.resize({ x = 100, y = 0, relative = true }))
-                               end
-                    end, { repeating = true, })
+                    hl.bind("L", layoutBind({
+                                  scrolling = hl.dsp.layout("colresize +0.1"),
+                                  dwindle = hl.dsp.window.resize({ x = 100, y = 0, relative = true }),
+                                  master = hl.dsp.window.resize({ x = 100, y = 0, relative = true })
+                                               }), { repeating = true, })
                     
-                    hl.bind("K", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               if currentLayout == "dwindle" or currentLayout == "master" then
-                                  hl.dispatch(hl.dsp.window.resize({ x = 0, y = -100, relative = true }))
-                               end
-                    end, { repeating = true, })
+                    hl.bind("K", layoutBind({
+                                  dwindle = hl.dsp.window.resize({ x = 0, y = -100, relative = true }),
+                                  master = hl.dsp.window.resize({ x = 0, y = -100, relative = true })
+                                            }), { repeating = true, })
                     
-                    hl.bind("J", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               if currentLayout == "dwindle" or currentLayout == "master" then                             
-                                  hl.dispatch(hl.dsp.window.resize({ x = 0, y = 100, relative = true }))
-                               end
-                    end, { repeating = true, })
+                    hl.bind("J", layoutBind({
+                                  dwindle = hl.dsp.window.resize({ x = 0, y = 100, relative = true }),
+                                  master = hl.dsp.window.resize({ x = 0, y = 100, relative = true })
+                                            }), { repeating = true, })
 
                     -- Mouse resizing and dragging.
                     hl.bind("mouse:272", hl.dsp.window.drag(),   { mouse = true })
                     hl.bind("mouse:273", hl.dsp.window.resize(), { mouse = true })
 
-                    hl.bind("BackSpace", function()
-                               u.previousSubmap()
-                    end)
+                    hl.bind("BackSpace", u.previousSubmap())
                     hl.bind("ESCAPE", hl.dsp.submap("reset"))
 end)
 
 hl.define_submap("window_workspace", function()
-                    hl.bind("H", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               
-                               if currentLayout == "scrolling" then
-                                  hl.dispatch(hl.dsp.layout("focus left"))
-                               elseif currentLayout == "dwindle" then
-                                  hl.dispatch(hl.dsp.focus({ direction = "left" }))
-                               elseif currentLayout == "master" or currentlayout == "monocle" then
-                                  hl.dispatch(hl.dsp.layout("cycleprev"))
-                               end
-                    end)
-
-                    hl.bind("L", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               
-                               if currentLayout == "scrolling" then
-                                  hl.dispatch(hl.dsp.layout("focus right"))
-                               elseif currentLayout == "dwindle" then
-                                  hl.dispatch(hl.dsp.focus({ direction = "right" }))
-                               elseif currentLayout == "master" or currentlayout == "monocle" then
-                                  hl.dispatch(hl.dsp.layout("cyclenext"))
-                               end
-                    end)
-
-                    hl.bind("K", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               
-                               if currentLayout == "scrolling" then
-                                  hl.dispatch(hl.dsp.layout("focus up"))
-                               elseif currentLayout == "dwindle" then
-                                  hl.dispatch(hl.dsp.focus({ direction = "up" }))
-                               end
-                    end)
-
-                    hl.bind("J", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               
-                               if currentLayout == "scrolling" then
-                                  hl.dispatch(hl.dsp.layout("focus down"))
-                               elseif currentLayout == "dwindle" then
-                                  hl.dispatch(hl.dsp.focus({ direction = "down" }))
-                               end
-                    end)
-
-                    hl.bind("SHIFT + H", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               
-                               if currentLayout == "scrolling" then
-                                  hl.dispatch(hl.dsp.layout("swapcol l"))
-                               elseif currentLayout == "dwindle" then
-                                  hl.dispatch(hl.dsp.window.move({ direction = "left" }))
-                               elseif currentLayout == "master" then
-                                  hl.dispatch(hl.dsp.layout("swapprev"))
-                               end
-                    end)
-                    
-                    hl.bind("SHIFT + L", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               
-                               if currentLayout == "scrolling" then
-                                  hl.dispatch(hl.dsp.layout("swapcol r"))
-                               elseif currentLayout == "dwindle" then
-                                  hl.dispatch(hl.dsp.window.move({ direction = "right" }))
-                               elseif currentLayout == "master" then
-                                  hl.dispatch(hl.dsp.layout("swapnext"))
-                               end
-                    end)
-
-                    hl.bind("SHIFT + K", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               
-                               if currentLayout == "scrolling" or currentLayout == "dwindle"  then
-                                  hl.dispatch(hl.dsp.window.move({ direction = "up" }))
-                               end
-                    end)
-                    
-                    hl.bind("SHIFT + J", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               
-                               if currentLayout == "scrolling" or currentLayout == "dwindle"  then
-                                  hl.dispatch(hl.dsp.window.move({ direction = "down" }))
-                               end
-                    end)
-                    
-                    hl.bind("M", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               
-                               if currentLayout == "scrolling" then
-                                  hl.dispatch(hl.dsp.layout("colresize +conf"))
-                               end
-                    end)
-
-                    hl.bind("SHIFT + M", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               
-                               if currentLayout == "scrolling" then
-                                  hl.dispatch(hl.dsp.layout("colresize -conf"))
-                               end
-                    end)
-
-                    hl.bind("SHIFT + LEFT", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               
-                               if currentLayout == "scrolling" then
-                                  hl.dispatch(hl.dsp.layout("consume_or_expel prev"))
-                               end
-                    end)
-
-                    hl.bind("SHIFT + RIGHT", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               
-                               if currentLayout == "scrolling" then
-                                  hl.dispatch(hl.dsp.layout("consume_or_expel next"))
-                               end
-                    end)
-
-                    hl.bind("SHIFT + F", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               
-                               if currentLayout == "scrolling" then
-                                  hl.dispatch(hl.dsp.layout("fit active"))
-                               end
-                    end)
-
-                    hl.bind("CTRL + F", function()
-                               local currentLayout = hl.get_active_workspace().tiled_layout
-                               
-                               if currentLayout == "scrolling" then
-                                  hl.dispatch(hl.dsp.layout("fit visible"))
-                               end
-                    end)
-
+                    hl.bind("H", layoutBind({
+                                  scrolling = hl.dsp.layout("focus left"),
+                                  dwindle   = hl.dsp.focus({ direction = "left" }),
+                                  master    = hl.dsp.layout("cycleprev"),
+                                  monocle   = hl.dsp.layout("cycleprev"),
+                    }))
+                    hl.bind("L", layoutBind({
+                                  scrolling = hl.dsp.layout("focus right"),
+                                  dwindle   = hl.dsp.focus({ direction = "right" }),
+                                  master    = hl.dsp.layout("cyclenext"),
+                                  monocle   = hl.dsp.layout("cyclenext")
+                    }))
+                    hl.bind("K", layoutBind({
+                                  scrolling = hl.dsp.layout("focus up"),
+                                  dwindle   = hl.dsp.focus({ direction = "up" })
+                    }))
+                    hl.bind("J", layoutBind({
+                                  scrolling = hl.dsp.layout("focus down"),
+                                  dwindle   = hl.dsp.focus({ direction = "down" })
+                    }))
+                    hl.bind("SHIFT + H", layoutBind({
+                                  scrolling = hl.dsp.layout("swapcol l"),
+                                  dwindle = hl.dsp.window.move({ direction = "left" }),
+                                  master = hl.dsp.layout("swapprev")
+                    }))
+                    hl.bind("SHIFT + L", layoutBind({
+                                  scrolling = hl.dsp.layout("swapcol r"),
+                                  dwindle = hl.dsp.window.move({ direction = "right" }),
+                                  master = hl.dsp.layout("swapnext")
+                    }))
+                    hl.bind("SHIFT + K", layoutBind({
+                                  scrolling = hl.dsp.window.move({ direction = "up" }),
+                                  dwindle = hl.dsp.window.move({ direction = "up" })
+                    }))
+                    hl.bind("SHIFT + J", layoutBind({
+                                  scrolling = hl.dsp.window.move({ direction = "down" }),
+                                  dwindle = hl.dsp.window.move({ direction = "down" })
+                    }))
+                    hl.bind("M", layoutBind({
+                                  scrolling = hl.dsp.layout("colresize +conf")
+                    }))
+                    hl.bind("SHIFT + M", layoutBind({
+                                  scrolling = hl.dsp.layout("colresize -conf")
+                    }))
+                    hl.bind("SHIFT + LEFT", layoutBind({
+                                  scrolling = hl.dsp.layout("consume_or_expel prev")
+                    }))
+                    hl.bind("SHIFT + RIGHT", layoutBind({
+                                  scrolling = hl.dsp.layout("consume_or_expel next")
+                    }))
+                    hl.bind("SHIFT + F", layoutBind({
+                                  scrolling = hl.dsp.layout("fit active")
+                    }))
+                    hl.bind("CTRL + F", layoutBind({
+                                  scrolling = hl.dsp.layout("fit visible")
+                    }))
                     hl.bind("F", hl.dsp.window.fullscreen({mode = "fullscreen", action = "toggle"}))
+
+                    hl.bind("PRIOR",  hl.dsp.window.cycle_next({ floating = true }))
+                    hl.bind("NEXT",  hl.dsp.window.cycle_next({ tiled = true }))
                     
                     for i = 1, 10 do
                        local key = i % 10 -- 10 maps to key 0.
@@ -387,9 +237,7 @@ hl.define_submap("window_workspace", function()
                        hl.bind("SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
                     end
                     
-                    hl.bind("BackSpace", function()
-                               u.previousSubmap()
-                    end)
+                    hl.bind("BackSpace", u.previousSubmap())
                     hl.bind("ESCAPE", hl.dsp.submap("reset"))
 end)
 
@@ -400,75 +248,63 @@ hl.define_submap("layout", function()
                     hl.bind("O", function() hl.workspace_rule({ workspace = hl.get_active_workspace().id, layout = "monocle" }) end)
 
                     -- Display current layout as a notification.
-                    hl.bind("N", function()
-                               u.layoutNotify()
-                    end)
+                    hl.bind("N", u.layoutNotify())
 
                     -- Cycling layouts forward/backward.
-                    local layoutNames  = { "dwindle", "master", "scrolling", "monocle" }
-                    hl.bind("K", function()
-                               u.cycleLayouts({ forward = true,
-                                                layouts = layoutNames,
-                               })
-                    end)
-                    hl.bind("J", function()
-                               u.cycleLayouts({ forward = false,
-                                                layouts = layoutNames,
-                               })
-                    end)
+                    local layouts  = { "dwindle", "master", "scrolling", "monocle" }
+                    local cycle = u.cycleLayouts(layouts)
+                    hl.bind("K", cycle(true))
+                    
+                    hl.bind("J", cycle(false))
 
-                    hl.bind("BackSpace", function()
-                               u.previousSubmap()
-                    end)
+                    hl.bind("BackSpace", u.previousSubmap())
                     hl.bind("ESCAPE", hl.dsp.submap("reset"))
 end)
 
-hl.define_submap("status_bar", function()
-                    hl.bind("S", function()
-                               if p.statusBar == "noctalia" then
-                                  hl.dispatch(hl.dsp.exec_cmd("noctalia msg settings-toggle"))
-                               end
-                               
-                    end)
-                    hl.bind("H", function()
-                               if p.statusBar == "noctalia" then
-                                  hl.dispatch(hl.dsp.exec_cmd("noctalia msg bar-toggle"))
-                               end
-                    end)
-                    hl.bind("W", function()
-                               if p.statusBar == "noctalia" then
-                                  hl.dispatch(hl.dsp.exec_cmd("noctalia msg panel-toggle wallpaper"))
-                               end
-                    end)
-                    hl.bind("C", function()
-                               if p.statusBar == "noctalia" then
-                                  hl.dispatch(hl.dsp.exec_cmd("noctalia msg panel-toggle control-center"))
-                               end
-                    end)
-                    hl.bind("N", function()
-                               if p.statusBar == "noctalia" then
-                                  hl.dispatch(hl.dsp.exec_cmd("noctalia msg panel-toggle control-center notifications"))
-                               end
-                    end)
-                    hl.bind("D", function()
-                               if p.statusBar == "noctalia" then
-                                  hl.dispatch(hl.dsp.exec_cmd("noctalia msg panel-toggle control-center calendar"))
-                               end
-                    end)
-                    hl.bind("A", function()
-                               if p.statusBar == "noctalia" then
-                                  hl.dispatch(hl.dsp.exec_cmd("noctalia msg panel-toggle control-center audio"))
-                               end
-                    end)
-                    hl.bind("Q", function()
-                               if p.statusBar == "noctalia" then
-                                  hl.dispatch(hl.dsp.exec_cmd("noctalia msg panel-toggle control-center session"))
-                               end
-                    end)
+local function barBind(bindTable)
+   return function()
+      local bar = p and p.statusBar
 
-                    hl.bind("BackSpace", function()
-                               u.previousSubmap()
-                    end)
+      if not bar then
+         return
+      end
+
+      local action = bindTable[bar]
+
+      if action then
+         if type(action) == "function" then
+            action()
+         else
+            hl.exec_cmd(action)
+         end
+      end
+   end
+end
+
+hl.define_submap("status_bar", function()
+                    hl.bind("S", barBind({
+                                  noctalia = "noctalia msg settings-toggle"           
+                    }))
+                    hl.bind("H", barBind({
+                                  noctalia = "noctalia msg bar-toggle"
+                    }))
+                    hl.bind("W", barBind({
+                                  noctalia = "noctalia msg panel-toggle wallpaper"
+                    }))
+                    hl.bind("C", barBind({
+                                  noctalia = "noctalia msg panel-toggle control-center"
+                    }))
+                    hl.bind("N", barBind({
+                                  noctalia = "noctalia msg panel-toggle control-center notifications"
+                    }))
+                    hl.bind("D", barBind({
+                                  noctalia = "noctalia msg panel-toggle control-center calendar"
+                    }))
+                    hl.bind("A", barBind({
+                                  noctalia = "noctalia msg panel-toggle control-center audio"
+                    }))
+
+                    hl.bind("BackSpace", u.previousSubmap())
                     hl.bind("ESCAPE", hl.dsp.submap("reset"))
 end)
 
@@ -480,9 +316,7 @@ hl.define_submap("volume", function()
                     hl.bind("M", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
                     hl.bind("SHIFT + M", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
 
-                    hl.bind("BackSpace", function()
-                               u.previousSubmap()
-                    end)
+                    hl.bind("BackSpace", u.previousSubmap())
                     hl.bind("ESCAPE", hl.dsp.submap("reset"))
 end)
 
@@ -492,9 +326,7 @@ hl.define_submap("brightness", function()
                     hl.bind("L", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 3%+"),  { locked = true, repeating = true })
                     hl.bind("H", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 3%-"),  { locked = true, repeating = true })
 
-                    hl.bind("BackSpace", function()
-                               u.previousSubmap()
-                    end)
+                    hl.bind("BackSpace", u.previousSubmap())
                     hl.bind("ESCAPE", hl.dsp.submap("reset"))
 end)
 
@@ -506,21 +338,17 @@ hl.define_submap("main", function()
                     hl.bind("B", hl.dsp.submap("status_bar"))
                     hl.bind("V", hl.dsp.submap("volume"))
                     hl.bind("SHIFT + B", hl.dsp.submap("brightness"))
-                    hl.bind("I", function()
-                               if p.statusBar == "noctalia" then
-                                  hl.dispatch(hl.dsp.exec_cmd("noctalia msg caffeine-toggle"))
-                               end
-                    end)
-                    hl.bind("Q", function()
-                               if p.statusBar == "noctalia" then
-                                  hl.dispatch(hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
-                               end
-                               hl.dispatch(hl.dsp.submap("reset"))
-                    end)
+                    hl.bind("I", barBind({
+                                  noctalia = "noctalia msg caffeine-toggle"
+                    }))
+                    hl.bind("Q", barBind({
+                                  noctalia = function()
+                                     hl.exec_cmd("noctalia msg panel-toggle session")
+                                     hl.dispatch(hl.dsp.submap("reset"))
+                                  end
+                    }))
                     
-                    hl.bind("BackSpace", function()
-                               u.previousSubmap()
-                    end)
+                    hl.bind("BackSpace", u.previousSubmap())
                     hl.bind("ESCAPE", hl.dsp.submap("reset"))
 end)
 
@@ -530,10 +358,14 @@ hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(p.menu))
 hl.bind(mainMod .. " + T", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + ESCAPE", hl.dsp.window.fullscreen({mode = "fullscreen", action = "toggle"}))
+hl.bind("MOD5 + F", hl.dsp.window.fullscreen({mode = "maximized", action = "toggle"}))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"))
 hl.bind(mainMod .. " + PRINT", hl.dsp.exec_cmd("hyprshot -m window"))
 hl.bind("PRINT", hl.dsp.exec_cmd("flameshot gui"))
 hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot -m region"))
+hl.bind(mainMod .. " + F12", barBind({
+              noctalia = "noctalia msg session lock"
+}))
 -- hl.bind("ALT + TAB", function()
 --      This is for the overview.
 -- end)
@@ -541,8 +373,8 @@ hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot -m region"))
 -- Be careful with this one as it doesn't ask and might be unnintentionally pressed.
 hl.bind("CTRL + ALT + DELETE", hl.dsp.exec_cmd("hyprshutdown -t 'Shutting down...' --post-cmd 'shutdown -P 0'"))
 
-hl.bind("SUPER + PRIOR",  hl.dsp.window.cycle_next({ floating = true }))
-hl.bind("SUPER + NEXT",  hl.dsp.window.cycle_next({ tiled = true }))
+hl.bind(mainMod .. " + PRIOR",  hl.dsp.window.cycle_next({ floating = true }))
+hl.bind(mainMod .. " + NEXT",  hl.dsp.window.cycle_next({ tiled = true }))
 
 -- Scroll through existing workspaces with mainMod + scroll.
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
