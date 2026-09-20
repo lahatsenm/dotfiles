@@ -55,6 +55,7 @@
 (setq auto-revert-verbose nil)
 ;;(blink-cursor-mode -1)
 (desktop-save-mode 1)
+(setq desktop-path '("~/.emacs.d/.cache/"))
 (recentf-mode 1)
 (windmove-default-keybindings)
 (ido-mode 1)
@@ -212,6 +213,9 @@
 ;; Set the default to use spaces ONLY for indentation, never tabs
 (setq-default indent-tabs-mode nil)
 
+;; HOOKS
+(add-hook 'find-file-hook 'recentf-save-list)
+
 ;; --- C, C++, Java, etc. (using the common hook) ---
 (add-hook 'c-mode-common-hook
           (lambda ()
@@ -249,3 +253,10 @@
   (when (file-directory-p qml-path)
     (add-to-list 'load-path qml-path)
     (require 'qml-ts-mode nil 'noerror)))
+
+;; WORKFLOW(S)
+(defun give-find-workflow ()
+  "Gives the find command workflow to delete annoying
+download directories in pacman package cache"
+  (interactive)
+  (insert "find /var/cache/pacman/pkg/ -type d -regex '.*download.*' -exec rm -r '{}' +"))
