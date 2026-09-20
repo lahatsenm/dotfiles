@@ -3,7 +3,7 @@
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
-    gaps 8
+    gaps 0
 
     // The effect of this is not apparently seen for now
     // since I am using "swww-daemon" for the backdrop wallpaper management.
@@ -53,7 +53,7 @@ layout {
     // You can change how the focus ring looks.
     focus-ring {
         // Uncomment this line to disable the focus ring.
-        on
+        off
 
         // How many logical pixels the ring extends out from the windows.
         width 2
@@ -148,7 +148,7 @@ layout {
         softness 30
 
         // Spread expands the shadow.
-        spread 6
+        spread 5
 
         // Offset moves the shadow relative to the window.
         offset x=0 y=5
