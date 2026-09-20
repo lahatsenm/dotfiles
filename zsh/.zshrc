@@ -116,8 +116,6 @@ WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
 
 # Keybindings
 bindkey -e                                        # emacs key bindings
-bindkey -s ^s "tmux-sessionizer\n"
-#bindkey -s '^z' 'zellij-sessionizer\n'
 
 # Enable completion features
 autoload -Uz compinit
@@ -221,22 +219,6 @@ if [ -f ~/.zshenv ]; then
     . ~/.zshenv
 fi
 
-# zellij thing
-#zellij_tab_name_update() {
-#    if [[ -n $ZELLIJ ]]; then
-#        local current_dir=$PWD
-#        if [[ $current_dir == $HOME ]]; then
-#            current_dir="~"
-#        else
-#            current_dir=${current_dir##*/}
-#        fi
-#        command nohup zellij action rename-tab $current_dir >/dev/null 2>&1
-#    fi
-#}
-#
-#zellij_tab_name_update
-#chpwd_functions+=(zellij_tab_name_update)
-
 #-----------------------------------------
 #                 ALIASES
 #-----------------------------------------
@@ -273,24 +255,6 @@ eval "$(zoxide init zsh)"
 #                 SSH
 #-----------------------------------------
 source $HOME/scripts/ssh_agent.sh
-
-# function sesh-sessions() {
-#   {
-#     exec </dev/tty
-#     exec <&1
-#     local session
-#     session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
-#     zle reset-prompt > /dev/null 2>&1 || true
-#     [[ -z "$session" ]] && return
-#     sesh connect $session
-#   }
-# }
-
-# zle     -N             sesh-sessions
-# bindkey -M emacs '\es' sesh-sessions
-# bindkey -M vicmd '\es' sesh-sessions
-# bindkey -M viins '\es' sesh-sessions
-
 #-----------------------------------------
 #                 END
 #-----------------------------------------
@@ -308,3 +272,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Added by Antigravity CLI installer
 export PATH="/home/logos/.local/bin:$PATH"
+autoload bashcompinit
+bashcompinit
+source "/home/logos/.local/share/bash-completion/completions/am"
