@@ -12,18 +12,19 @@
  '(delete-selection-mode t)
  '(ido-enable-flex-matching t)
  '(package-selected-packages
-   '(auctex avy breadcrumb catppuccin-theme cmake-mode company
-            doom-themes dream-theme easy-theme-preview eshell-vterm
-            expand-region gruber-darker-theme gruvbox-theme helm
-            hyprlang-ts-mode ido-at-point ido-complete-space-or-hyphen
-            ido-completing-read+ ido-hacks ido-select-window
-            ido-yes-or-no kanagawa-themes kdl-mode lsp-mode lua-mode
-            luarocks move-text multiple-cursors nord-theme
-            nordic-night-theme nordless-theme numeri pdf-tools
-            qml-mode resize-window rust-mode smex
-            solarized-gruvbox-theme solarized-theme spatial-window
-            sudo-edit tree-sitter typst-ts-mode visual-replace
-            yaml-mode yasnippet zig-mode zoxide))
+   '(amber-mode auctex avy breadcrumb catppuccin-theme cmake-mode company
+                doom-themes dream-theme easy-theme-preview
+                eshell-vterm expand-region gruber-darker-theme
+                gruvbox-theme helm hyprlang-ts-mode ido-at-point
+                ido-complete-space-or-hyphen ido-completing-read+
+                ido-hacks ido-select-window ido-yes-or-no
+                kanagawa-themes kdl-mode lsp-mode lua-mode luarocks
+                move-text multiple-cursors nord-theme
+                nordic-night-theme nordless-theme numeri pdf-tools
+                qml-mode resize-window rust-mode smex
+                solarized-gruvbox-theme solarized-theme spatial-window
+                sudo-edit tree-sitter typst-ts-mode visual-replace
+                yaml-mode yasnippet zig-mode zoxide))
  '(pdf-view-incompatible-modes
    '(linum-mode linum-relative-mode helm-linum-relative-mode nlinum-mode
                 nlinum-hl-mode nlinum-relative-mode yalinum-mode
