@@ -3,15 +3,44 @@ hl.config({
     general = {
         gaps_in  = 0,
         gaps_out = 0,
-
-        border_size = 0,
+        
+        border_size = 2,
 
         col = {
             -- active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
             -- inactive_border = "rgba(595959aa)",
-            active_border   = { colors = {"rgba(88c0d0ee)", "rgba(81a1c1ee)"}, angle = 45 },
-           inactive_border = "rgba(434c5eaa)",
+           --  active_border   = { colors = {"rgba(88c0d0ee)", "rgba(81a1c1ee)"}, angle = 45 },
+           -- inactive_border = "rgba(434c5eaa)",
            -- active_border = "rgba(363A40ee)",
+
+           -- two-stop
+           active_border = {
+              colors = { "rgba(6a6460cc)", "rgba(2a282800)" },
+              angle = 90
+           },
+           inactive_border = {
+              colors = { "rgba(4a464299)", "rgba(1e1d1d00)" },
+              angle = 90
+           }
+
+           -- multi-stop
+           -- active_border = {
+           --      colors = {
+           --          "rgba(7a746fcc)",
+           --          "rgba(4a464288)",
+           --          "rgba(2a282800)"
+           --      },
+           --      angle = 90
+           --  },
+           --  inactive_border = {
+           --      colors = {
+           --          "rgba(5a544f99)",
+           --          "rgba(3a383555)",
+           --          "rgba(1e1d1d00)"
+           --      },
+           --      angle = 90
+           --  }
+
         },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
@@ -24,18 +53,20 @@ hl.config({
     },
 
     decoration = {
-        rounding       = 6,
-        rounding_power = 0,
+        rounding       = 5,
+        rounding_power = 2,
+        border_part_of_window = true,
 
         -- Change transparency of focused and unfocused windows
         active_opacity   = 1.0,
         inactive_opacity = 1.0,
-
+        
         shadow = {
             enabled      = true,
-            range        = 4,
+            range        = 10,
             render_power = 3,
-            color        = 0xee1a1a1a,
+            --color        = 0xee1a1a1a,
+            color = "rgba(0a0908aa)",
         },
 
         blur = {
@@ -44,7 +75,12 @@ hl.config({
             passes    = 1,
             vibrancy  = 0.1696,
         },
-
+        
+        glow = {
+           enabled = false,
+           color_inactive = 0x001a1a1a,
+        },
+        
         motion_blur = {
            enabled = false,
         },

@@ -82,8 +82,14 @@ hl.bind(mainMod .. " + SHIFT + J", layoutBind({
               scrolling = hl.dsp.window.move({ direction = "down" }),
               dwindle = hl.dsp.window.move({ direction = "down" })
 }))
-hl.bind("MOD5 + TAB", layoutBind({
+hl.bind("MOD5 + C", layoutBind({
               scrolling = hl.dsp.layout("center")
+}))
+hl.bind("MOD5 + TAB", layoutBind({
+              scrolling = hl.dsp.layout("move -200"),
+}))
+hl.bind("MOD5 + SHIFT + TAB", layoutBind({
+              scrolling = hl.dsp.layout("move +200"),
 }))
 hl.bind(mainMod .. "+ M", layoutBind({
               scrolling = hl.dsp.layout("colresize +conf")

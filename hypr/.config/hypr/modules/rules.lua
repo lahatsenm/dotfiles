@@ -85,15 +85,6 @@ hl.window_rule({
 
 hl.window_rule({
       match = {
-         class = "^io.missioncenter.MissionCenter$",
-      },
-
-      float = true,
-      size = {1160, 761},
-})
-
-hl.window_rule({
-      match = {
          class = "waypaper",
       },
 
@@ -117,12 +108,4 @@ hl.window_rule({
 
       float = true,
       size = {1104, 787},
-})
-
-hl.window_rule({
-      match = {
-         float = true,
-      },
-
-      animation = "popin",
 })
